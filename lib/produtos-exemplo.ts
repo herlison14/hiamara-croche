@@ -1,4 +1,7 @@
-// Imagens livres de direitos autorais do Unsplash
+// Imagens livres de direitos autorais - placeholders SVG aconchegantes
+const criarPlaceholder = (color: string, titulo: string) =>
+  `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='${encodeURIComponent(color)}' width='500' height='500'/%3E%3Ctext x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='24' fill='%23654321'%3E🧶%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='20' fill='%23654321' font-weight='bold'%3E${encodeURIComponent(titulo)}%3C/text%3E%3C/svg%3E`
+
 export const produtosExemplo = [
   {
     id: '1',
@@ -8,7 +11,7 @@ export const produtosExemplo = [
     categoria: { nome: 'Blusas' },
     fotos: [
       {
-        url: 'https://images.unsplash.com/photo-1590080876-a4ca66a87c3d?w=500&h=500&fit=crop',
+        url: criarPlaceholder('%23f5d7d3', 'Blusa Rosa'),
         alt: 'Blusa de Crochê Rosa',
       },
     ],
@@ -22,7 +25,7 @@ export const produtosExemplo = [
     categoria: { nome: 'Bonecos' },
     fotos: [
       {
-        url: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500&h=500&fit=crop',
+        url: criarPlaceholder('%23f0e6d8', 'Amigurumi'),
         alt: 'Boneco de Crochê Amigurumi',
       },
     ],
@@ -36,7 +39,7 @@ export const produtosExemplo = [
     categoria: { nome: 'Bolsas' },
     fotos: [
       {
-        url: 'https://images.unsplash.com/photo-1590874957320-7f5a5b81d63f?w=500&h=500&fit=crop',
+        url: criarPlaceholder('%23e8d4c4', 'Bolsa Artesanal'),
         alt: 'Bolsa de Crochê Artesanal',
       },
     ],
@@ -50,7 +53,7 @@ export const produtosExemplo = [
     categoria: { nome: 'Blusas' },
     fotos: [
       {
-        url: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&h=500&fit=crop',
+        url: criarPlaceholder('%23fff0e6', 'Top Summer'),
         alt: 'Top de Crochê Summer',
       },
     ],
