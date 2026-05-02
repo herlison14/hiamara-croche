@@ -14,13 +14,14 @@ export function CinematicHero() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
     >
-      {/* Imagem realista de fundo */}
+      {/* Imagem realista profissional de fundo */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/hero-crochet-scene.svg)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1682953307762-a640d8dbd659?w=2000&q=80)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
         }}
         initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
