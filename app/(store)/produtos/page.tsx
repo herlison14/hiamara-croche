@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { ProductCard } from '@/components/store/ProductCard'
 import { CategoryHero } from '@/components/categoryHero'
-import { ProductTabs } from '@/components/ProductTabs'
-import { getCategorias, getProdutos } from '@/lib/supabase'
+import { ProdutosClient } from '@/components/ProdutosClient'
+import { getProdutosFirebase, getCategorias } from '@/lib/firebase-helpers'
 
 export const metadata = { title: 'Produtos — HIAMARA CROCHÊ' }
 
@@ -10,35 +10,25 @@ const ICONES: Record<string, string> = {
   'bonecos': '🧸', 'bolsas': '👜', 'roupas': '👗',
 }
 
-const CATS_FALLBACK = [
-  { id: '1', slug: 'bonecos', nome: 'Bonecos' },
-  { id: '2', slug: 'bolsas', nome: 'Bolsas' },
-  { id: '3', slug: 'roupas', nome: 'Roupas' },
-]
-
 interface Props {
-  searchParams: Promise<{ categoria?: string; ordem?: string; busca?: string }>
+  searchParams: Promise<{ categoria?: string; abas?: string; busca?: string }>
 }
 
-async function ProdutoGrid({ categoria, ordem, busca }: { categoria?: string; ordem?: string; busca?: string }) {
-  const todos = await getProdutos({ categoria }).catch(() => [])
+async function ProdutoGrid({ categoria, abas, busca }: { categoria?: string; abas?: string; busca?: string }) {
+  const todos = await getProdutosFirebase({ categoria }).catch(() => [])
 
   let filtrados = busca
     ? todos.filter((p) => p.nome.toLowerCase().includes(busca.toLowerCase()))
     : todos
 
-  if (ordem === 'preco_asc') filtrados = [...filtrados].sort((a, b) => a.preco - b.preco)
-  else if (ordem === 'preco_desc') filtrados = [...filtrados].sort((a, b) => b.preco - a.preco)
-  else if (ordem === 'mais_vendido') filtrados = filtrados.filter((p) => p.mais_vendido)
-
   if (filtrados.length === 0) {
     return (
       <div className="col-span-full text-center py-20 space-y-4">
         <div className="text-5xl">🧶</div>
-        <p className="text-xl font-light text-[#5C4A4A]" style={{ fontFamily: 'Cormorant Garamond' }}>
+        <p className="text-xl font-light text-texto-escuro" style={{ fontFamily: 'Cormorant Garamond' }}>
           Nenhum produto encontrado
         </p>
-        <p className="text-[#8A7B7B] text-sm">Tente outro filtro ou busca</p>
+        <p className="text-texto-medio text-sm">Tente outro filtro ou busca</p>
       </div>
     )
   }
@@ -51,16 +41,16 @@ async function ProdutoGrid({ categoria, ordem, busca }: { categoria?: string; or
 }
 
 export default async function ProdutosPage({ searchParams }: Props) {
-  const { categoria, ordem, busca } = await searchParams
-  const categorias = await getCategorias().catch(() => CATS_FALLBACK)
-  const categoriasFiltered = categorias.length > 0 ? categorias : CATS_FALLBACK
+  const { categoria, abas, busca } = await searchParams
+  const categorias = await getCategorias().catch(() => [])
 
-  const ordens = [
-    { value: '', label: 'Mais Recentes' },
-    { value: 'preco_asc', label: 'Menor Preço' },
-    { value: 'preco_desc', label: 'Maior Preço' },
-    { value: 'mais_vendido', label: 'Mais Vendidos' },
+  const CATS_FALLBACK = [
+    { id: '1', slug: 'bonecos', nome: 'Bonecos', ativo: true, ordem: 0 },
+    { id: '2', slug: 'bolsas', nome: 'Bolsas', ativo: true, ordem: 1 },
+    { id: '3', slug: 'roupas', nome: 'Roupas', ativo: true, ordem: 2 },
   ]
+
+  const categoriasFiltered = categorias && categorias.length > 0 ? categorias : CATS_FALLBACK
 
   return (
     <div className="min-h-screen bg-creme-50">
@@ -80,8 +70,8 @@ export default async function ProdutosPage({ searchParams }: Props) {
       )}
 
       <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Filtros - sticky no mobile */}
-        <div className="flex flex-col gap-4 mb-12">
+        {/* Filtros */}
+        <div className="flex flex-col gap-6 mb-12">
           {/* Categorias em destaque */}
           <div className="flex gap-3 overflow-x-auto pb-2">
             <a
@@ -102,37 +92,27 @@ export default async function ProdutosPage({ searchParams }: Props) {
             ))}
           </div>
 
-          {/* Search e Order */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <form className="flex-1">
-              <input
-                name="busca"
-                defaultValue={busca}
-                placeholder="Buscar produto..."
-                className="w-full px-4 py-3 bg-white border border-creme-300 rounded-lg text-sm focus:outline-none focus:border-rosa-400 focus:ring-2 focus:ring-rosa-100 text-texto-escuro"
-              />
-            </form>
-
-            <select
-              name="ordem"
-              defaultValue={ordem}
-              className="px-4 py-3 bg-white border border-creme-300 rounded-lg text-sm text-texto-escuro focus:outline-none focus:border-rosa-400 focus:ring-2 focus:ring-rosa-100"
-            >
-              {ordens.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-            </select>
-          </div>
+          {/* Search */}
+          <form className="flex-1">
+            <input
+              name="busca"
+              defaultValue={busca}
+              placeholder="Buscar produto..."
+              className="w-full px-4 py-3 bg-white border border-creme-300 rounded-lg text-sm focus:outline-none focus:border-rosa-400 focus:ring-2 focus:ring-rosa-100 text-texto-escuro"
+            />
+          </form>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          <Suspense fallback={
-            Array.from({ length: 8 }).map((_, i) => (
+        {/* Produtos com Abas Client-Side */}
+        <Suspense fallback={
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="aspect-[4/5] rounded-2xl bg-creme-200 animate-pulse" />
-            ))
-          }>
-            <ProdutoGrid categoria={categoria} ordem={ordem} busca={busca} />
-          </Suspense>
-        </div>
+            ))}
+          </div>
+        }>
+          <ProdutosClient categoria={categoria} abaInicial={abas || 'todos'} />
+        </Suspense>
       </div>
     </div>
   )
