@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <!-- Gradientes realistas -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f1e8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ede5d8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Sombras softas -->
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="2" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.15"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Luz ambiente -->
+    <radialGradient id="lightGlow" cx="30%" cy="20%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- Textura de tecido -->
+    <pattern id="fabricTexture" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="#e8e3d6"/>
+      <line x1="0" y1="0" x2="100" y2="100" stroke="#d9cfc0" stroke-width="0.5" opacity="0.2"/>
+      <line x1="100" y1="0" x2="0" y2="100" stroke="#d9cfc0" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <!-- Fundo principal -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+
+  <!-- Luz ambiente suave -->
+  <ellipse cx="960" cy="270" rx="1000" ry="600" fill="url(#lightGlow)"/>
+
+  <!-- Tecido de fundo (linho) -->
+  <rect x="300" y="200" width="1400" height="800" fill="url(#fabricTexture)" opacity="0.6" filter="url(#softShadow)"/>
+
+  <!-- Janela ao fundo (luz natural) -->
+  <rect x="1400" y="150" width="400" height="500" fill="#e8f4f8" opacity="0.3" rx="20"/>
+  <rect x="1450" y="180" width="140" height="180" fill="#d0e8f0" opacity="0.2" rx="10"/>
+  <rect x="1610" y="180" width="140" height="180" fill="#d0e8f0" opacity="0.2" rx="10"/>
+
+  <!-- Rolos de fio - Cor Rosa (à esquerda) -->
+  <g filter="url(#softShadow)">
+    <ellipse cx="400" cy="550" rx="80" ry="85" fill="#e8b4c4"/>
+    <ellipse cx="400" cy="540" rx="80" ry="50" fill="#f0c4d4"/>
+    <!-- Fio enrolado -->
+    <circle cx="400" cy="540" r="35" fill="none" stroke="#d99bb0" stroke-width="8" opacity="0.6"/>
+    <circle cx="400" cy="540" r="28" fill="none" stroke="#e8a8c0" stroke-width="6" opacity="0.7"/>
+    <circle cx="400" cy="540" r="20" fill="none" stroke="#f0b8cc" stroke-width="4" opacity="0.8"/>
+  </g>
+
+  <!-- Rolos de fio - Cor Creme (centro-esquerda) -->
+  <g filter="url(#softShadow)">
+    <ellipse cx="600" cy="480" rx="75" ry="80" fill="#f5e6d3"/>
+    <ellipse cx="600" cy="470" rx="75" ry="48" fill="#fef2e0"/>
+    <circle cx="600" cy="470" r="32" fill="none" stroke="#e8d4bf" stroke-width="7" opacity="0.6"/>
+    <circle cx="600" cy="470" r="25" fill="none" stroke="#f0e4ce" stroke-width="5" opacity="0.7"/>
+  </g>
+
+  <!-- Rolos de fio - Cor Terracota (direita) -->
+  <g filter="url(#softShadow)">
+    <ellipse cx="1200" cy="520" rx="78" ry="82" fill="#d4a090"/>
+    <ellipse cx="1200" cy="510" rx="78" ry="50" fill="#e8b8a8"/>
+    <circle cx="1200" cy="510" r="35" fill="none" stroke="#c4886d" stroke-width="8" opacity="0.6"/>
+    <circle cx="1200" cy="510" r="27" fill="none" stroke="#d9a896" stroke-width="6" opacity="0.7"/>
+  </g>
+
+  <!-- Rolos de fio - Cor Amarelo Quente (direita) -->
+  <g filter="url(#softShadow)">
+    <ellipse cx="1450" cy="480" rx="72" ry="78" fill="#e8d9a0"/>
+    <ellipse cx="1450" cy="470" rx="72" ry="46" fill="#f5e8b8"/>
+    <circle cx="1450" cy="470" r="30" fill="none" stroke="#d4c090" stroke-width="7" opacity="0.6"/>
+    <circle cx="1450" cy="470" r="23" fill="none" stroke="#e8dca8" stroke-width="5" opacity="0.7"/>
+  </g>
+
+  <!-- Agulha de crochê (grande, em primeiro plano) -->
+  <g filter="url(#softShadow)">
+    <!-- Cabo de madeira -->
+    <rect x="800" y="300" width="25" height="380" rx="12" fill="#c9a876" opacity="0.9"/>
+    <rect x="808" y="300" width="9" height="380" rx="4" fill="#ddb989" opacity="0.6"/>
+    <!-- Ponta metálica -->
+    <ellipse cx="812" cy="690" rx="12" ry="18" fill="#b8860b"/>
+    <ellipse cx="812" cy="695" rx="10" ry="12" fill="#d4a017"/>
+  </g>
+
+  <!-- Agulha de crochê 2 (ângulo) -->
+  <g filter="url(#softShadow)" transform="translate(1100 250) rotate(35)">
+    <rect x="0" y="0" width="22" height="340" rx="11" fill="#8b6f47" opacity="0.85"/>
+    <rect x="6" y="0" width="10" height="340" rx="5" fill="#b89968" opacity="0.5"/>
+    <ellipse cx="11" cy="340" rx="11" ry="16" fill="#b8860b"/>
+    <ellipse cx="11" cy="345" rx="9" ry="11" fill="#d4a017"/>
+  </g>
+
+  <!-- Agulha de crochê 3 (ângulo menor) -->
+  <g filter="url(#softShadow)" transform="translate(500 350) rotate(-25)">
+    <rect x="0" y="0" width="20" height="300" rx="10" fill="#a0826d" opacity="0.8"/>
+    <rect x="5" y="0" width="10" height="300" rx="5" fill="#c4a878" opacity="0.5"/>
+    <ellipse cx="10" cy="300" rx="10" ry="15" fill="#b8860b"/>
+  </g>
+
+  <!-- Fios soltos decorativos -->
+  <path d="M 350 620 Q 450 550 520 480" stroke="#e8b4c4" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M 650 560 Q 720 500 780 420" stroke="#f0e4ce" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M 1250 590 Q 1320 540 1380 480" stroke="#e8b8a8" stroke-width="3" fill="none" opacity="0.35"/>
+
+  <!-- Agulhas menores dispersas -->
+  <g filter="url(#softShadow)">
+    <rect x="450" y="680" width="15" height="180" rx="7" fill="#a0826d" opacity="0.7" transform="rotate(-15 457 770)"/>
+    <ellipse cx="460" cy="850" rx="7" ry="10" fill="#d4a017" opacity="0.8"/>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="1350" y="700" width="14" height="170" rx="7" fill="#c9a876" opacity="0.65" transform="rotate(20 1357 785)"/>
+    <ellipse cx="1370" cy="860" rx="7" ry="10" fill="#b8860b" opacity="0.75"/>
+  </g>
+
+  <!-- Efeito bokeh (desfoque) ao fundo -->
+  <circle cx="200" cy="300" r="60" fill="#f0e6d3" opacity="0.08" filter="url(#softShadow)"/>
+  <circle cx="1700" cy="400" r="80" fill="#e8d9c0" opacity="0.06" filter="url(#softShadow)"/>
+  <circle cx="900" cy="150" r="100" fill="#f5f1e8" opacity="0.05" filter="url(#softShadow)"/>
+
+  <!-- Sombra base realista -->
+  <ellipse cx="960" cy="950" rx="800" ry="80" fill="#000000" opacity="0.08" filter="url(#softShadow)"/>
+
+  <!-- Textura final sutil -->
+  <rect width="1920" height="1080" fill="url(#fabricTexture)" opacity="0.15"/>
+</svg>
