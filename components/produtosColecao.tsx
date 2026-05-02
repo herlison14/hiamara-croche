@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { CinematicProductCard } from './cinematicProductCard'
 import { StaggerContainer, StaggerItem } from './cinematicTransition'
+import { useFirebaseProdutos } from '@/hooks/useFirebaseProdutos'
 import { produtosExemplo } from '@/lib/produtos-exemplo'
 
 interface Produto {
@@ -15,28 +15,14 @@ interface Produto {
 }
 
 export function ProdutosColecao() {
-  const [produtos, setProdutos] = useState<Produto[]>([])
-  const [loading, setLoading] = useState(true)
+  const { produtos: firebaseProdutos, loading, error } = useFirebaseProdutos(4)
 
-  useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const response = await fetch('/api/colecao?limite=4')
-        if (!response.ok) throw new Error('Erro ao buscar produtos')
-        const data = await response.json()
-        setProdutos(data)
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('ℹ️ Usando imagens do Unsplash - Supabase não configurado')
-        }
-        setProdutos(produtosExemplo)
-      } finally {
-        setLoading(false)
-      }
-    }
+  // Usar Firebase se disponível, senão usar demo data
+  const produtos = firebaseProdutos.length > 0 ? firebaseProdutos : produtosExemplo
 
-    fetchProdutos()
-  }, [])
+  if (error && process.env.NODE_ENV === 'development') {
+    console.log('ℹ️ Usando dados demo - Firebase não configurado ou erro ao conectar')
+  }
 
   if (loading) {
     return (
