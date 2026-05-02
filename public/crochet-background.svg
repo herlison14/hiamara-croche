@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5e6d3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f0dcc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ead8c3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo base caloroso -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+
+  <!-- Texture suave -->
+  <circle cx="10%" cy="20%" r="80" fill="#c8a882" opacity="0.08"/>
+  <circle cx="85%" cy="75%" r="120" fill="#d4a574" opacity="0.06"/>
+  <circle cx="50%" cy="60%" r="100" fill="#e8b4a0" opacity="0.05"/>
+
+  <!-- Agulha de crochê 1 - canto superior esquerdo -->
+  <g transform="translate(80, 60) rotate(-35)">
+    <!-- Cabo -->
+    <rect x="-3" y="0" width="6" height="100" fill="#d4a574" rx="3"/>
+    <!-- Gancho -->
+    <path d="M -3 100 Q -8 110 -5 120" stroke="#c9956f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Detalhe -->
+    <circle cx="0" cy="30" r="2" fill="#e8c4a0"/>
+  </g>
+
+  <!-- Agulha de crochê 2 - lado direito -->
+  <g transform="translate(1100, 120) rotate(45)">
+    <!-- Cabo -->
+    <rect x="-3" y="0" width="6" height="110" fill="#a07a5c" rx="3"/>
+    <!-- Gancho -->
+    <path d="M -3 110 Q -8 120 -5 130" stroke="#8f6f52" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Detalhe -->
+    <circle cx="0" cy="40" r="2" fill="#c4b5a0"/>
+  </g>
+
+  <!-- Agulha de crochê 3 - centro baixo -->
+  <g transform="translate(600, 320) rotate(-25)">
+    <!-- Cabo -->
+    <rect x="-2.5" y="0" width="5" height="95" fill="#b8956b" rx="2.5"/>
+    <!-- Gancho -->
+    <path d="M -2.5 95 Q -7 105 -4 115" stroke="#9d7d5a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Detalhe -->
+    <circle cx="0" cy="25" r="1.5" fill="#d4c4b0"/>
+  </g>
+
+  <!-- Agulha de crochê 4 - canto inferior direito -->
+  <g transform="translate(1050, 340) rotate(-55)">
+    <!-- Cabo -->
+    <rect x="-3" y="0" width="6" height="105" fill="#c9956f" rx="3"/>
+    <!-- Gancho -->
+    <path d="M -3 105 Q -8 115 -5 125" stroke="#b07a52" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Fio de crochê solto decorativo 1 -->
+  <path d="M 150 200 Q 200 180 250 200 T 350 200" stroke="#d4a574" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Fio de crochê solto decorativo 2 -->
+  <path d="M 900 100 Q 950 120 1000 100" stroke="#a07a5c" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+
+  <!-- Agulha pequena esquerda -->
+  <g transform="translate(200, 300) rotate(60)">
+    <rect x="-2" y="0" width="4" height="70" fill="#9d7d5a" rx="2"/>
+    <path d="M -2 70 Q -5 78 -2 85" stroke="#7a5f48" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Agulha pequena direita -->
+  <g transform="translate(980, 250) rotate(-40)">
+    <rect x="-2" y="0" width="4" height="75" fill="#b8956b" rx="2"/>
+    <path d="M -2 75 Q -5 83 -2 90" stroke="#9d7d5a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

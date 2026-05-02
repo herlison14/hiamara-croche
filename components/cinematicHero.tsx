@@ -18,14 +18,15 @@ export function CinematicHero() {
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          background: 'linear-gradient(135deg, rgba(242, 230, 220, 0.5) 0%, rgba(232, 195, 195, 0.3) 50%, rgba(242, 230, 220, 0.5) 100%)',
+          backgroundImage: 'url(/crochet-background.svg)',
+          backgroundPosition: 'center',
         }}
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2, ease: 'easeOut' }}
       >
-        {/* Overlay com gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-creme-50/30 to-creme-50" />
+        {/* Overlay suave */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-creme-50/20 to-creme-50" />
       </motion.div>
 
       {/* Conteúdo Hero com Zoom + Fade */}

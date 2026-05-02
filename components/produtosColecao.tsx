@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { CinematicProductCard } from './cinematicProductCard'
 import { StaggerContainer, StaggerItem } from './cinematicTransition'
+import { produtosExemplo } from '@/lib/produtos-exemplo'
 
 interface Produto {
   id: string
@@ -10,43 +11,8 @@ interface Produto {
   slug: string
   preco: number
   categoria: { nome: string }
-  fotos: { url: string }[]
+  fotos: { url: string; alt?: string }[]
 }
-
-const produtosDemo: Produto[] = [
-  {
-    id: '1',
-    nome: 'Blusa de Crochê Rosa',
-    slug: 'blusa-rosa',
-    preco: 89.90,
-    categoria: { nome: 'Blusas' },
-    fotos: [],
-  },
-  {
-    id: '2',
-    nome: 'Boneco de Crochê Amigurumi',
-    slug: 'amigurumi',
-    preco: 45.90,
-    categoria: { nome: 'Bonecos' },
-    fotos: [],
-  },
-  {
-    id: '3',
-    nome: 'Bolsa de Crochê Artesanal',
-    slug: 'bolsa-artesanal',
-    preco: 129.90,
-    categoria: { nome: 'Bolsas' },
-    fotos: [],
-  },
-  {
-    id: '4',
-    nome: 'Top de Crochê Summer',
-    slug: 'top-summer',
-    preco: 65.90,
-    categoria: { nome: 'Blusas' },
-    fotos: [],
-  },
-]
 
 export function ProdutosColecao() {
   const [produtos, setProdutos] = useState<Produto[]>([])
@@ -61,9 +27,9 @@ export function ProdutosColecao() {
         setProdutos(data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
-          console.log('ℹ️ Usando dados demo - Supabase não configurado')
+          console.log('ℹ️ Usando imagens do Unsplash - Supabase não configurado')
         }
-        setProdutos(produtosDemo)
+        setProdutos(produtosExemplo)
       } finally {
         setLoading(false)
       }
