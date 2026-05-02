@@ -10,15 +10,15 @@ interface CategoryHeroProps {
 
 const CATEGORY_IMAGES: Record<string, { url: string; description: string }> = {
   'bonecos': {
-    url: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=2000&q=80',
+    url: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=2000&q=80',
     description: 'Bonecos artesanais com amor e dedicação'
   },
   'bolsas': {
-    url: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=2000&q=80',
+    url: 'https://images.unsplash.com/photo-1616996099207-4bc0e4eaf4b5?w=2000&q=80',
     description: 'Bolsas tecidas com fios selecionados'
   },
   'roupas': {
-    url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=2000&q=80',
+    url: 'https://images.unsplash.com/photo-1615886287135-a987073e8f0d?w=2000&q=80',
     description: 'Roupas em crochê feitas especialmente para você'
   },
 }
