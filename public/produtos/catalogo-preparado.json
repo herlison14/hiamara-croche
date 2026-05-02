@@ -1,0 +1,541 @@
+[
+  {
+    "nome": "Amigurumi Anime Naruto",
+    "slug": "amigurumi-anime-naruto",
+    "categoria": "Bonecos",
+    "preco": 45.9,
+    "descricao": "Amigurumi Anime Naruto - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.04 (1).jpeg",
+        "alt": "Amigurumi Anime Naruto"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.04 (2).jpeg",
+        "alt": "Amigurumi Anime Naruto"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.04 (3).jpeg",
+        "alt": "Amigurumi Anime Naruto"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.04.jpeg",
+        "alt": "Amigurumi Anime Naruto"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.695Z"
+  },
+  {
+    "nome": "Amigurumi Sakura Rosa",
+    "slug": "amigurumi-sakura-rosa",
+    "categoria": "Bonecos",
+    "preco": 48.9,
+    "descricao": "Amigurumi Sakura Rosa - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05 (1).jpeg",
+        "alt": "Amigurumi Sakura Rosa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05 (2).jpeg",
+        "alt": "Amigurumi Sakura Rosa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05 (3).jpeg",
+        "alt": "Amigurumi Sakura Rosa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05 (4).jpeg",
+        "alt": "Amigurumi Sakura Rosa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05 (5).jpeg",
+        "alt": "Amigurumi Sakura Rosa"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.696Z"
+  },
+  {
+    "nome": "Amigurumi Unicórnio Mágico",
+    "slug": "amigurumi-unicornio-magico",
+    "categoria": "Bonecos",
+    "preco": 52.9,
+    "descricao": "Amigurumi Unicórnio Mágico - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.05.jpeg",
+        "alt": "Amigurumi Unicórnio Mágico"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.06 (1).jpeg",
+        "alt": "Amigurumi Unicórnio Mágico"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.06 (2).jpeg",
+        "alt": "Amigurumi Unicórnio Mágico"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.06 (3).jpeg",
+        "alt": "Amigurumi Unicórnio Mágico"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.06.jpeg",
+        "alt": "Amigurumi Unicórnio Mágico"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.699Z"
+  },
+  {
+    "nome": "Amigurumi Baby Shark",
+    "slug": "amigurumi-baby-shark",
+    "categoria": "Bonecos",
+    "preco": 42.9,
+    "descricao": "Amigurumi Baby Shark - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.07 (1).jpeg",
+        "alt": "Amigurumi Baby Shark"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.07.jpeg",
+        "alt": "Amigurumi Baby Shark"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.08 (1).jpeg",
+        "alt": "Amigurumi Baby Shark"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.08 (2).jpeg",
+        "alt": "Amigurumi Baby Shark"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.699Z"
+  },
+  {
+    "nome": "Amigurumi Animais Diversos",
+    "slug": "amigurumi-animais-diversos",
+    "categoria": "Bonecos",
+    "preco": 46.9,
+    "descricao": "Amigurumi Animais Diversos - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.08 (3).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.08 (4).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.08.jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.09 (1).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.09 (2).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.09 (3).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.09 (4).jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.09.jpeg",
+        "alt": "Amigurumi Animais Diversos"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Amigurumi Smiley Face",
+    "slug": "amigurumi-smiley-face",
+    "categoria": "Bonecos",
+    "preco": 39.9,
+    "descricao": "Amigurumi Smiley Face - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10 (1).jpeg",
+        "alt": "Amigurumi Smiley Face"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10 (2).jpeg",
+        "alt": "Amigurumi Smiley Face"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10 (3).jpeg",
+        "alt": "Amigurumi Smiley Face"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Amigurumi Personagens Variados",
+    "slug": "amigurumi-personagens-variados",
+    "categoria": "Bonecos",
+    "preco": 49.9,
+    "descricao": "Amigurumi Personagens Variados - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10 (4).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10 (5).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.10.jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.11 (1).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.11 (2).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.11 (3).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.11 (4).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.11.jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.12 (1).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.12 (2).jpeg",
+        "alt": "Amigurumi Personagens Variados"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Bolsa Sacola Natural",
+    "slug": "bolsa-sacola-natural",
+    "categoria": "Bolsas",
+    "preco": 89.9,
+    "descricao": "Bolsa Sacola Natural - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.12 (3).jpeg",
+        "alt": "Bolsa Sacola Natural"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.12 (4).jpeg",
+        "alt": "Bolsa Sacola Natural"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.12.jpeg",
+        "alt": "Bolsa Sacola Natural"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.13 (1).jpeg",
+        "alt": "Bolsa Sacola Natural"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.13 (2).jpeg",
+        "alt": "Bolsa Sacola Natural"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.13 (3).jpeg",
+        "alt": "Bolsa Sacola Natural"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Bolsa Sacola Colorida",
+    "slug": "bolsa-sacola-colorida",
+    "categoria": "Bolsas",
+    "preco": 94.9,
+    "descricao": "Bolsa Sacola Colorida - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.13 (4).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.13.jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.14 (1).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.14 (2).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.14 (3).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.14 (4).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.14.jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.15 (1).jpeg",
+        "alt": "Bolsa Sacola Colorida"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Clutch de Crochê",
+    "slug": "clutch-de-croche",
+    "categoria": "Bolsas",
+    "preco": 65.9,
+    "descricao": "Clutch de Crochê - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.15 (2).jpeg",
+        "alt": "Clutch de Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.48.15.jpeg",
+        "alt": "Clutch de Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.55 (1).jpeg",
+        "alt": "Clutch de Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.55 (2).jpeg",
+        "alt": "Clutch de Crochê"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Bolsa Estruturada Premium",
+    "slug": "bolsa-estruturada-premium",
+    "categoria": "Bolsas",
+    "preco": 119.9,
+    "descricao": "Bolsa Estruturada Premium - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.55 (3).jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.55 (4).jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.55.jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.56 (1).jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.56 (2).jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.56 (3).jpeg",
+        "alt": "Bolsa Estruturada Premium"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Blusa Azul Turquesa",
+    "slug": "blusa-azul-turquesa",
+    "categoria": "Roupas",
+    "preco": 129.9,
+    "descricao": "Blusa Azul Turquesa - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.56 (4).jpeg",
+        "alt": "Blusa Azul Turquesa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.56.jpeg",
+        "alt": "Blusa Azul Turquesa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.57 (1).jpeg",
+        "alt": "Blusa Azul Turquesa"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.57 (2).jpeg",
+        "alt": "Blusa Azul Turquesa"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Blusa Rosa Pastel",
+    "slug": "blusa-rosa-pastel",
+    "categoria": "Roupas",
+    "preco": 124.9,
+    "descricao": "Blusa Rosa Pastel - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.57 (3).jpeg",
+        "alt": "Blusa Rosa Pastel"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.57 (4).jpeg",
+        "alt": "Blusa Rosa Pastel"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.57.jpeg",
+        "alt": "Blusa Rosa Pastel"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.58 (1).jpeg",
+        "alt": "Blusa Rosa Pastel"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Blusa Creme Off-White",
+    "slug": "blusa-creme-off-white",
+    "categoria": "Roupas",
+    "preco": 119.9,
+    "descricao": "Blusa Creme Off-White - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.58 (2).jpeg",
+        "alt": "Blusa Creme Off-White"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.58 (3).jpeg",
+        "alt": "Blusa Creme Off-White"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.58.jpeg",
+        "alt": "Blusa Creme Off-White"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Top Summer Amarelo",
+    "slug": "top-summer-amarelo",
+    "categoria": "Roupas",
+    "preco": 99.9,
+    "descricao": "Top Summer Amarelo - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59 (1).jpeg",
+        "alt": "Top Summer Amarelo"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59 (2).jpeg",
+        "alt": "Top Summer Amarelo"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59 (3).jpeg",
+        "alt": "Top Summer Amarelo"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59 (4).jpeg",
+        "alt": "Top Summer Amarelo"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59 (5).jpeg",
+        "alt": "Top Summer Amarelo"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Vestido Midi Crochê",
+    "slug": "vestido-midi-croche",
+    "categoria": "Roupas",
+    "preco": 189.9,
+    "descricao": "Vestido Midi Crochê - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.51.59.jpeg",
+        "alt": "Vestido Midi Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.00 (1).jpeg",
+        "alt": "Vestido Midi Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.00 (2).jpeg",
+        "alt": "Vestido Midi Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.00 (3).jpeg",
+        "alt": "Vestido Midi Crochê"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.00 (4).jpeg",
+        "alt": "Vestido Midi Crochê"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  },
+  {
+    "nome": "Blusa Rendada Elegante",
+    "slug": "blusa-rendada-elegante",
+    "categoria": "Roupas",
+    "preco": 139.9,
+    "descricao": "Blusa Rendada Elegante - Feito à mão com crochê premium",
+    "ativo": true,
+    "fotos": [
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.00.jpeg",
+        "alt": "Blusa Rendada Elegante"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.01 (1).jpeg",
+        "alt": "Blusa Rendada Elegante"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.01 (2).jpeg",
+        "alt": "Blusa Rendada Elegante"
+      },
+      {
+        "localFile": "WhatsApp Image 2026-05-02 at 16.52.01 (3).jpeg",
+        "alt": "Blusa Rendada Elegante"
+      }
+    ],
+    "criado_em": "2026-05-02T20:07:16.700Z"
+  }
+]
