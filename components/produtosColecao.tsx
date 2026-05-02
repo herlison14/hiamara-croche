@@ -60,7 +60,9 @@ export function ProdutosColecao() {
         const data = await response.json()
         setProdutos(data)
       } catch (error) {
-        console.error('Erro:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('ℹ️ Usando dados demo - Supabase não configurado')
+        }
         setProdutos(produtosDemo)
       } finally {
         setLoading(false)
