@@ -54,9 +54,9 @@ export function CategoryHero({ categoria, categorias }: CategoryHeroProps) {
         animate={{ scale: 1 }}
         transition={{ duration: 2, ease: 'easeOut' }}
       >
-        {/* Overlays com gradiente sofisticado */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+        {/* Overlays com gradiente sofisticado - 50% mais transparente */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/25" />
       </motion.div>
 
       {/* Conteúdo da categoria */}

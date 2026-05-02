@@ -32,7 +32,9 @@ export function ProdutosClient({ categoria, abaInicial = 'todos' }: ProdutosClie
         else if (abaAtiva === 'novo') filtros.novo = true
         else if (abaAtiva === 'mais_vendido') filtros.mais_vendido = true
 
+        console.log('[ProdutosClient] Fetching with filters:', filtros, 'aba:', abaAtiva)
         const dados = await fetchProdutoosAction(filtros)
+        console.log('[ProdutosClient] Got products:', dados.length)
         setProdutos(dados)
       } catch (error) {
         console.error('Erro ao buscar produtos:', error)

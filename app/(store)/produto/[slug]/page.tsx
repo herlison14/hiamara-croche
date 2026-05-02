@@ -1,173 +1,106 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ChevronRight, MessageCircle } from 'lucide-react'
-import { ProductImageGallery } from '@/components/store/ProductImageGallery'
-import { VariantSelector } from '@/components/store/VariantSelector'
-import { AddToCartButton } from '@/components/store/AddToCartButton'
-import { ProductCard } from '@/components/store/ProductCard'
-import { supabase } from '@/lib/supabase'
-import type { Produto } from '@/lib/types'
+import { fetchProdutoosAction } from '@/lib/produtos-actions'
+import { notFound } from 'next/navigation'
 
-export default function ProdutoPage({ params }: { params: { slug: string } }) {
-  const [produto, setProduto] = useState<Produto | null>(null)
-  const [relacionados, setRelacionados] = useState<Produto[]>([])
-  const [variantes, setVariantes] = useState<Record<string, string>>({})
-  const [loading, setLoading] = useState(true)
+interface Props {
+  params: Promise<{ slug: string }>
+}
 
-  useEffect(() => {
-    async function load() {
-      const { data } = await supabase
-        .from('produtos')
-        .select('*, categoria:categorias(*), fotos:produto_fotos(*)')
-        .eq('slug', params.slug)
-        .eq('ativo', true)
-        .single()
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params
+  const produtos = await fetchProdutoosAction({})
+  const produto = produtos.find(p => p.slug === slug)
 
-      if (!data) { setLoading(false); return }
-      setProduto(data as Produto)
-
-      const init: Record<string, string> = {}
-      if (data.variantes) {
-        for (const v of data.variantes) {
-          if (v.opcoes?.length) init[v.nome] = v.opcoes[0]
-        }
-      }
-      setVariantes(init)
-
-      if (data.categoria_id) {
-        const { data: rel } = await supabase
-          .from('produtos')
-          .select('*, categoria:categorias(*)')
-          .eq('ativo', true)
-          .eq('categoria_id', data.categoria_id)
-          .neq('id', data.id)
-          .limit(4)
-        setRelacionados((rel ?? []) as Produto[])
-      }
-      setLoading(false)
-    }
-    load()
-  }, [params.slug])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#FDFAF5] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#C97A84] border-t-transparent rounded-full animate-spin" />
-      </div>
-    )
+  if (!produto) {
+    return { title: 'Produto não encontrado' }
   }
 
-  if (!produto) return notFound()
+  return {
+    title: `${produto.nome} — HIAMARA CROCHÊ`,
+    description: produto.descricao,
+  }
+}
 
-  const imagens = [
-    ...(produto.imagem_principal ? [produto.imagem_principal] : []),
-    ...(produto.imagens ?? []),
-    ...(produto.fotos?.map((f) => f.url) ?? []),
-  ]
+export default async function ProdutoPage({ params }: Props) {
+  const { slug } = await params
+  const produtos = await fetchProdutoosAction({})
+  const produto = produtos.find(p => p.slug === slug)
 
-  const whatsappUrl = `https://wa.me/5521999999999?text=${encodeURIComponent(`Olá! Tenho interesse no produto: ${produto.nome} — ${typeof window !== 'undefined' ? window.location.href : ''}`)}`
+  if (!produto) {
+    notFound()
+  }
 
   return (
-    <div className="min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-[#8A7B7B] mb-8">
-          <Link href="/" className="hover:text-[#C97A84]">Home</Link>
-          <ChevronRight size={12} />
-          <Link href="/produtos" className="hover:text-[#C97A84]">Produtos</Link>
-          {produto.categoria && (
-            <>
-              <ChevronRight size={12} />
-              <Link href={`/produtos?categoria=${produto.categoria.slug}`} className="hover:text-[#C97A84]">
-                {produto.categoria.nome}
-              </Link>
-            </>
-          )}
-          <ChevronRight size={12} />
-          <span className="text-[#5C4A4A] truncate max-w-40">{produto.nome}</span>
-        </nav>
+    <div className="min-h-screen bg-creme-50">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex items-center gap-2 text-sm text-texto-medio">
+          <Link href="/" className="hover:text-rosa-400 transition-colors">Home</Link>
+          <span>/</span>
+          <Link href="/produtos" className="hover:text-rosa-400 transition-colors">Produtos</Link>
+          <span>/</span>
+          <span className="text-texto-escuro font-medium">{produto.nome}</span>
+        </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <ProductImageGallery imagens={imagens} nome={produto.nome} />
-
-          <div className="space-y-6">
-            {produto.categoria && (
-              <span className="text-xs font-medium uppercase tracking-widest text-[#C97A84]">
-                {produto.categoria.nome}
-              </span>
-            )}
-            <h1 className="text-4xl md:text-5xl font-light text-[#3D2B2B] leading-tight" style={{ fontFamily: 'Cormorant Garamond' }}>
-              {produto.nome}
-            </h1>
-
-            <div className="flex items-baseline gap-3">
-              {produto.preco_promocional && produto.preco_promocional < produto.preco ? (
-                <>
-                  <span className="text-3xl font-semibold text-[#A85A65]" style={{ fontFamily: 'Cormorant Garamond' }}>
-                    R$ {produto.preco_promocional.toFixed(2).replace('.', ',')}
-                  </span>
-                  <span className="text-lg text-[#8A7B7B] line-through">
-                    R$ {produto.preco.toFixed(2).replace('.', ',')}
-                  </span>
-                </>
-              ) : (
-                <span className="text-3xl font-semibold text-[#A85A65]" style={{ fontFamily: 'Cormorant Garamond' }}>
-                  R$ {produto.preco.toFixed(2).replace('.', ',')}
-                </span>
-              )}
-            </div>
-
-            <div className="flex items-center gap-4 text-sm text-[#8A7B7B] border-t border-b border-[#EDE0CD] py-4">
-              <span>⏱ Produção em {produto.tempo_producao_dias} dias úteis</span>
-              <span className="text-[#EDE0CD]">|</span>
-              <span>🧶 100% Artesanal</span>
-            </div>
-
-            <VariantSelector variantes={produto.variantes} selecionado={variantes} onChange={setVariantes} />
-
-            <div className="space-y-3 pt-2">
-              <AddToCartButton produto={produto} variante={variantes} size="lg" />
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300"
-              >
-                <MessageCircle size={18} /> Comprar pelo WhatsApp
-              </a>
-            </div>
-
-            {produto.descricao && (
-              <div className="border-t border-[#EDE0CD] pt-6">
-                <h3 className="text-lg font-medium text-[#3D2B2B] mb-3" style={{ fontFamily: 'Cormorant Garamond' }}>
-                  Descrição
-                </h3>
-                <p className="text-[#5C4A4A] leading-relaxed whitespace-pre-line">{produto.descricao}</p>
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="space-y-4">
+            {produto.fotos?.[0] && (
+              <div className="aspect-square rounded-2xl overflow-hidden bg-creme-100">
+                <img
+                  src={produto.fotos[0].url}
+                  alt={produto.fotos[0].alt}
+                  className="w-full h-full object-cover"
+                />
               </div>
             )}
+          </div>
 
-            <div className="bg-[#F5EFE6] rounded-xl p-4 space-y-2 text-sm text-[#5C4A4A]">
-              <p>✦ Peça artesanal única — pode haver pequenas variações</p>
-              <p>✦ Pagamento via PIX ou WhatsApp</p>
-              <p>✦ Entrega para todo o Brasil</p>
-              {produto.peso_gramas && <p>✦ Peso aproximado: {produto.peso_gramas}g</p>}
+          <div className="space-y-6">
+            <div>
+              <span className="inline-block px-3 py-1 bg-rosa-100 text-rosa-600 text-xs font-bold uppercase tracking-widest rounded-full">
+                {produto.categoria}
+              </span>
+            </div>
+
+            <div>
+              <h1
+                className="text-4xl md:text-5xl font-light text-texto-escuro leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {produto.nome}
+              </h1>
+            </div>
+
+            <div className="border-t border-b border-creme-200 py-6">
+              <p
+                className="text-4xl font-light text-rosa-500"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                R$ {produto.preco.toFixed(2).replace('.', ',')}
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-texto-escuro">Descrição</h3>
+              <p className="text-texto-medio leading-relaxed">
+                {produto.descricao}
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-4">
+              <button className="w-full py-4 bg-gradient-to-r from-rosa-400 to-rosa-500 hover:from-rosa-500 hover:to-rosa-600 text-white font-semibold uppercase tracking-widest rounded-lg transition-all duration-300">
+                Adicionar ao Carrinho
+              </button>
+              <Link
+                href="/produtos"
+                className="block w-full py-4 border-2 border-rosa-400 text-rosa-400 hover:bg-rosa-50 font-semibold uppercase tracking-widest rounded-lg transition-all duration-300 text-center"
+              >
+                Ver Mais Produtos
+              </Link>
             </div>
           </div>
         </div>
-
-        {relacionados.length > 0 && (
-          <section className="mt-20">
-            <h2 className="text-3xl font-light text-[#3D2B2B] mb-8" style={{ fontFamily: 'Cormorant Garamond' }}>
-              Você Também Pode Gostar
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-              {relacionados.map((p) => <ProductCard key={p.id} produto={p} variant="compact" />)}
-            </div>
-          </section>
-        )}
       </div>
     </div>
   )
