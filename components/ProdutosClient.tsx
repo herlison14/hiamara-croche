@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ProductCardFirebase } from '@/components/ProductCardFirebase'
-import { getProdutosFirebase, Produto } from '@/lib/firebase-helpers'
+import { fetchProdutoosAction, type Produto } from '@/lib/produtos-actions'
 
 interface ProdutosClientProps {
   categoria?: string
@@ -32,7 +32,7 @@ export function ProdutosClient({ categoria, abaInicial = 'todos' }: ProdutosClie
         else if (abaAtiva === 'novo') filtros.novo = true
         else if (abaAtiva === 'mais_vendido') filtros.mais_vendido = true
 
-        const dados = await getProdutosFirebase(filtros)
+        const dados = await fetchProdutoosAction(filtros)
         setProdutos(dados)
       } catch (error) {
         console.error('Erro ao buscar produtos:', error)

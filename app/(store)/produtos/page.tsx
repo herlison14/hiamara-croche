@@ -2,7 +2,8 @@ import { Suspense } from 'react'
 import { ProductCard } from '@/components/store/ProductCard'
 import { CategoryHero } from '@/components/categoryHero'
 import { ProdutosClient } from '@/components/ProdutosClient'
-import { getProdutosFirebase, getCategorias } from '@/lib/firebase-helpers'
+import { getCategorias } from '@/lib/firebase-helpers'
+import { fetchProdutoosAction } from '@/lib/produtos-actions'
 
 export const metadata = { title: 'Produtos — HIAMARA CROCHÊ' }
 
@@ -15,7 +16,7 @@ interface Props {
 }
 
 async function ProdutoGrid({ categoria, abas, busca }: { categoria?: string; abas?: string; busca?: string }) {
-  const todos = await getProdutosFirebase({ categoria }).catch(() => [])
+  const todos = await fetchProdutoosAction({ categoria }).catch(() => [])
 
   let filtrados = busca
     ? todos.filter((p) => p.nome.toLowerCase().includes(busca.toLowerCase()))
