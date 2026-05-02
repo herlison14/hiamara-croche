@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --creme-50: #FDFAF5;
+  --creme-100: #F5EFE6;
+  --creme-200: #EDE0CD;
+  --creme-300: #E0CCBA;
+  --rosa-100: #F4C5CB;
+  --rosa-200: #E8A0A8;
+  --rosa-300: #D98089;
+  --rosa-400: #C97A84;
+  --rosa-500: #A85A65;
+  --rosa-600: #8A4450;
+  --texto-claro: #8A7B7B;
+  --texto-medio: #5C4A4A;
+  --texto-escuro: #3D2B2B;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--creme-50);
+    color: var(--texto-medio);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--texto-escuro);
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background-color: var(--rosa-100);
+    color: var(--texto-escuro);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--creme-100);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--rosa-300);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--rosa-400);
+  }
+}
+
+@layer components {
+  .flower-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    filter: blur(3px);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .container-main {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-main {
+      padding-inline: 3rem;
+    }
+  }
+}
