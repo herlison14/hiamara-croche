@@ -37,4 +37,7 @@ Thumbs.db
 # Claude
 .claude/
 
+# Product images (stored in cloud)
+/public/produtos/
+
 .env*.local
