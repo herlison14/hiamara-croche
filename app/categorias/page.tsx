@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { CategoriaCarrossel } from '@/components/CategoriaCarrossel'
 import { categoriasData } from '@/lib/produtos-data'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Categorias — HIAMARA CROCHÊ',
@@ -9,15 +10,19 @@ export const metadata: Metadata = {
 
 export default function CategoriasPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-creme-50">
       {/* Header */}
-      <div className="bg-gradient-to-b from-rose-50 to-white pt-32 pb-16 px-6">
+      <div className="bg-gradient-to-b from-rosa-100/40 to-creme-50 pt-32 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-light text-black tracking-tight mb-6">
+          <p className="text-xs font-medium uppercase tracking-widest text-rosa-400 mb-4">
+            Explorar
+          </p>
+          <h1 className="font-display text-5xl md:text-7xl font-light text-texto-escuro tracking-tight mb-6">
             Nossas Categorias
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Explore nossa coleção completa de peças em crochê. Cada categoria contém produtos artesanais únicos, confeccionados com dedicação e carinho.
+          <p className="text-lg text-texto-medio max-w-2xl leading-relaxed font-light">
+            Explore nossa coleção completa de peças em crochê. Cada categoria contém
+            produtos artesanais únicos, confeccionados com dedicação e carinho.
           </p>
         </div>
       </div>
@@ -35,17 +40,23 @@ export default function CategoriasPage() {
       </div>
 
       {/* CTA Final */}
-      <div className="bg-rose-50 py-16 px-6">
+      <div className="bg-creme-100 border-t border-creme-200 py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-light text-black mb-4">
+          <h2 className="font-display text-4xl font-light text-texto-escuro mb-4">
             Não encontrou o que procura?
           </h2>
-          <p className="text-gray-600 mb-8">
-            Oferecemos produtos personalizados. Entre em contato conosco para consultar sobre criações customizadas.
+          <p className="text-texto-medio mb-8 font-light">
+            Oferecemos produtos personalizados. Entre em contato para consultar
+            sobre criações customizadas.
           </p>
-          <button className="rounded-lg bg-rose-500 px-8 py-3 font-bold text-white transition-colors hover:bg-rose-600">
+          <a
+            href="https://wa.me/5521997927927"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-lg bg-rosa-400 hover:bg-rosa-500 px-8 py-3 font-medium text-white uppercase tracking-widest text-sm transition-colors"
+          >
             Fale Conosco
-          </button>
+          </a>
         </div>
       </div>
     </div>
