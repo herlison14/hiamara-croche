@@ -37,7 +37,10 @@ Thumbs.db
 # Claude
 .claude/
 
-# Product images (stored in cloud)
-/public/produtos/
+# Product images originals (too large for git, keep only WebP)
+/public/produtos/*.png
+/public/produtos/*.jpeg
+/public/produtos/*.jpg
+
 
 .env*.local

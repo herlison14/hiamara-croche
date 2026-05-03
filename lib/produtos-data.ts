@@ -27,7 +27,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Blusa de crochê em tons quentes, perfeita para o verão',
       categoria: 'blusa',
       preco: 89.90,
-      imagem: 'blusa_amarela-summer_1_pro.png',
+      imagem: 'blusa_amarela-summer_1_pro.webp',
       materiais: 'Fio 100% algodão',
       tamanhos: ['P', 'M', 'G', 'GG']
     },
@@ -37,7 +37,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação da blusa em amarelo',
       categoria: 'blusa',
       preco: 89.90,
-      imagem: 'blusa_amarela-summer_2_pro.png',
+      imagem: 'blusa_amarela-summer_2_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -46,7 +46,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Design exclusivo com detalhes premium',
       categoria: 'blusa',
       preco: 129.90,
-      imagem: 'blusa_premium-designs_1_pro.png',
+      imagem: 'blusa_premium-designs_1_pro.webp',
       materiais: 'Fio mercerizado'
     },
     {
@@ -55,7 +55,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de design premium',
       categoria: 'blusa',
       preco: 129.90,
-      imagem: 'blusa_premium-designs_2_pro.png'
+      imagem: 'blusa_premium-designs_2_pro.webp'
     },
     {
       id: 'blusa-rosa-1',
@@ -63,7 +63,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Blusa delicada em tons pastel',
       categoria: 'blusa',
       preco: 99.90,
-      imagem: 'blusa_rosa-pastel_1_pro.png',
+      imagem: 'blusa_rosa-pastel_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -72,7 +72,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação rosa pastel',
       categoria: 'blusa',
       preco: 99.90,
-      imagem: 'blusa_rosa-pastel_2_pro.png'
+      imagem: 'blusa_rosa-pastel_2_pro.webp'
     },
     {
       id: 'blusa-turquesa-1',
@@ -80,7 +80,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Blusa com detalhes rendados em turquesa',
       categoria: 'blusa',
       preco: 119.90,
-      imagem: 'blusa_turquesa-rendada_1_pro.png',
+      imagem: 'blusa_turquesa-rendada_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -89,7 +89,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação rendada turquesa',
       categoria: 'blusa',
       preco: 119.90,
-      imagem: 'blusa_turquesa-rendada_2_pro.png'
+      imagem: 'blusa_turquesa-rendada_2_pro.webp'
     }
   ],
 
@@ -100,7 +100,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Bolsa com padrão floral branco',
       categoria: 'bolsa',
       preco: 79.90,
-      imagem: 'bolsa_flores-brancas_1_pro.png',
+      imagem: 'bolsa_flores-brancas_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -109,7 +109,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Bolsa colorida com padrão multicolor',
       categoria: 'bolsa',
       preco: 89.90,
-      imagem: 'bolsa_multicolor_1_pro.png',
+      imagem: 'bolsa_multicolor_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -118,7 +118,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Bolsa premium em cores variadas',
       categoria: 'bolsa',
       preco: 119.90,
-      imagem: 'bolsa_premium-cores_1_pro.png',
+      imagem: 'bolsa_premium-cores_1_pro.webp',
       materiais: 'Fio mercerizado'
     },
     {
@@ -127,7 +127,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação premium de cores',
       categoria: 'bolsa',
       preco: 119.90,
-      imagem: 'bolsa_premium-cores_2_pro.png'
+      imagem: 'bolsa_premium-cores_2_pro.webp'
     },
     {
       id: 'bolsa-sacola-1',
@@ -135,7 +135,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Bolsa grande tipo sacola',
       categoria: 'bolsa',
       preco: 99.90,
-      imagem: 'bolsa_sacola-grande_1_pro.png',
+      imagem: 'bolsa_sacola-grande_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -144,7 +144,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de sacola grande',
       categoria: 'bolsa',
       preco: 99.90,
-      imagem: 'bolsa_sacola-grande_2_pro.png'
+      imagem: 'bolsa_sacola-grande_2_pro.webp'
     }
   ],
 
@@ -155,7 +155,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Personagens diversos do universo anime',
       categoria: 'amigurumi',
       preco: 49.90,
-      imagem: 'amigurumi_anime-diversos_1_pro.png',
+      imagem: 'amigurumi_anime-diversos_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -164,7 +164,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de personagens anime',
       categoria: 'amigurumi',
       preco: 49.90,
-      imagem: 'amigurumi_anime-diversos_2_pro.png'
+      imagem: 'amigurumi_anime-diversos_2_pro.webp'
     },
     {
       id: 'amigurumi-personagens-1',
@@ -172,7 +172,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Personagens variados em forma de amigurumi',
       categoria: 'amigurumi',
       preco: 54.90,
-      imagem: 'amigurumi_personagens-variados_1_pro.png',
+      imagem: 'amigurumi_personagens-variados_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -181,7 +181,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de personagens',
       categoria: 'amigurumi',
       preco: 54.90,
-      imagem: 'amigurumi_personagens-variados_2_pro.png'
+      imagem: 'amigurumi_personagens-variados_2_pro.webp'
     },
     {
       id: 'amigurumi-naruto-1',
@@ -189,7 +189,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Personagens de Naruto em crochê',
       categoria: 'amigurumi',
       preco: 59.90,
-      imagem: 'amigurumi_naruto-ninja_1_pro.png',
+      imagem: 'amigurumi_naruto-ninja_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -198,7 +198,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação personagem Naruto',
       categoria: 'amigurumi',
       preco: 59.90,
-      imagem: 'amigurumi_naruto-ninja_2_pro.png'
+      imagem: 'amigurumi_naruto-ninja_2_pro.webp'
     },
     {
       id: 'amigurumi-boneco-1',
@@ -206,7 +206,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Boneco rosa em crochê',
       categoria: 'amigurumi',
       preco: null,
-      imagem: 'amigurumi_boneco-rosa_1_pro.png',
+      imagem: 'amigurumi_boneco-rosa_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -215,7 +215,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de boneco rosa',
       categoria: 'amigurumi',
       preco: null,
-      imagem: 'amigurumi_boneco-rosa_2_pro.png'
+      imagem: 'amigurumi_boneco-rosa_2_pro.webp'
     }
   ],
 
@@ -226,7 +226,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Jogo de cozinha com padrão floral',
       categoria: 'cozinha',
       preco: 69.90,
-      imagem: 'cozinha_jogo-floral_1_pro.png',
+      imagem: 'cozinha_jogo-floral_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -235,7 +235,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação jogo floral',
       categoria: 'cozinha',
       preco: 69.90,
-      imagem: 'cozinha_jogo-floral_2_pro.png'
+      imagem: 'cozinha_jogo-floral_2_pro.webp'
     },
     {
       id: 'cozinha-jogo-multicolor-1',
@@ -243,7 +243,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Jogo colorido para cozinha',
       categoria: 'cozinha',
       preco: 79.90,
-      imagem: 'cozinha_jogo-multicolor_1_pro.png',
+      imagem: 'cozinha_jogo-multicolor_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -252,7 +252,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação multicolor',
       categoria: 'cozinha',
       preco: 79.90,
-      imagem: 'cozinha_jogo-multicolor_2_pro.png'
+      imagem: 'cozinha_jogo-multicolor_2_pro.webp'
     },
     {
       id: 'cozinha-jogo-verde-1',
@@ -260,7 +260,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Jogo em verde e branco para cozinha',
       categoria: 'cozinha',
       preco: 74.90,
-      imagem: 'cozinha_jogo-verde-branco_1_pro.png',
+      imagem: 'cozinha_jogo-verde-branco_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -269,7 +269,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Acessório decorativo para banheiro e cozinha',
       categoria: 'cozinha',
       preco: 34.90,
-      imagem: 'cozinha_acessorio-banheiro_1_pro.png',
+      imagem: 'cozinha_acessorio-banheiro_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -278,7 +278,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Tapete decorativo para cozinha',
       categoria: 'cozinha',
       preco: 89.90,
-      imagem: 'cozinha_tapete_1_pro.png',
+      imagem: 'cozinha_tapete_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -287,7 +287,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de tapete',
       categoria: 'cozinha',
       preco: 89.90,
-      imagem: 'cozinha_tapete_2_pro.png'
+      imagem: 'cozinha_tapete_2_pro.webp'
     }
   ],
 
@@ -298,7 +298,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Itens decorativos para casa',
       categoria: 'decoracao',
       preco: 59.90,
-      imagem: 'decoracao_home-decor_1_pro.png',
+      imagem: 'decoracao_home-decor_1_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -307,7 +307,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação de decoração',
       categoria: 'decoracao',
       preco: 59.90,
-      imagem: 'decoracao_home-decor_2_pro.png'
+      imagem: 'decoracao_home-decor_2_pro.webp'
     },
     {
       id: 'decoracao-decorativo-1',
@@ -315,7 +315,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Itens decorativos variados',
       categoria: 'decoracao',
       preco: 44.90,
-      imagem: 'decoracao-decorativo_127_pro.png',
+      imagem: 'decoracao-decorativo_127_pro.webp',
       materiais: 'Fio 100% algodão'
     },
     {
@@ -324,7 +324,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Variação decorativa',
       categoria: 'decoracao',
       preco: 44.90,
-      imagem: 'decoracao-decorativo_128_pro.png'
+      imagem: 'decoracao-decorativo_128_pro.webp'
     }
   ],
 
@@ -335,7 +335,7 @@ const produtosPorCategoria: Record<string, ProdutoData[]> = {
       descricao: 'Acessório de crochê elegante',
       categoria: 'acessorio',
       preco: null,
-      imagem: 'acessorio_1_pro.png',
+      imagem: 'acessorio_1_pro.webp',
       materiais: 'Fio 100% algodão'
     }
   ]
