@@ -77,19 +77,19 @@ export async function fetchProdutoosAction(filtros?: {
 
     if (filtros?.categoria) {
       const normalized = normalizeCategory(filtros.categoria)
-      documents = documents.filter(d => d.categoria === normalized)
+      documents = documents.filter((d: Produto) => d.categoria === normalized)
     }
     if (filtros?.destaque) {
-      documents = documents.filter(d => d.destaque === true)
+      documents = documents.filter((d: Produto) => d.destaque === true)
     }
     if (filtros?.novo) {
-      documents = documents.filter(d => d.novo === true)
+      documents = documents.filter((d: Produto) => d.novo === true)
     }
     if (filtros?.mais_vendido) {
-      documents = documents.filter(d => d.mais_vendido === true)
+      documents = documents.filter((d: Produto) => d.mais_vendido === true)
     }
 
-    documents.sort((a, b) => {
+    documents.sort((a: Produto, b: Produto) => {
       const dateA = new Date(a.criado_em || 0).getTime()
       const dateB = new Date(b.criado_em || 0).getTime()
       return dateB - dateA

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase'
 
+export const dynamic = 'force-dynamic'
+
 function isAdmin(req: NextRequest) {
   return req.headers.get('Authorization') === `Bearer ${process.env.ADMIN_SECRET}`
 }
