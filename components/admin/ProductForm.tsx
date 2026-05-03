@@ -1,9 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import toast from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet'
 import type { Produto, Categoria, Variante } from '@/lib/types'
 
 interface ProductFormProps {
@@ -100,89 +111,153 @@ export function ProductForm({ produto, onSuccess, onClose }: ProductFormProps) {
     }
   }
 
-  const field = (label: string, name: keyof typeof form, type = 'text', required = false) => (
-    <div>
-      <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">{label}</label>
-      <input
-        type={type}
-        value={form[name] as string}
-        onChange={(e) => setForm((prev) => ({ ...prev, [name]: e.target.value }))}
-        required={required}
-        className="w-full px-3 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]"
-      />
-    </div>
-  )
-
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-end" onClick={onClose}>
-      <div className="w-full max-w-lg bg-white h-full overflow-y-auto shadow-2xl p-6 space-y-5" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>
-            {isEdit ? 'Editar Produto' : 'Novo Produto'}
-          </h2>
-          <button onClick={onClose} className="text-[#8A7B7B] hover:text-[#3D2B2B]"><X size={20} /></button>
-        </div>
+    <Sheet open onOpenChange={(open) => !open && onClose()}>
+      <SheetContent side="right" className="w-full sm:max-w-lg">
+        <SheetHeader className="mb-6">
+          <SheetTitle>{isEdit ? 'Editar Produto' : 'Novo Produto'}</SheetTitle>
+        </SheetHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">Nome *</label>
-            <input type="text" value={form.nome} onChange={(e) => handleNomeChange(e.target.value)} required
-              className="w-full px-3 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
+            <Label htmlFor="nome" className="mb-1">Nome *</Label>
+            <Input
+              id="nome"
+              value={form.nome}
+              onChange={(e) => handleNomeChange(e.target.value)}
+              required
+            />
           </div>
 
-          {field('Slug', 'slug', 'text', true)}
+          <div>
+            <Label htmlFor="slug" className="mb-1">Slug *</Label>
+            <Input
+              id="slug"
+              value={form.slug}
+              onChange={(e) => setForm((p) => ({ ...p, slug: e.target.value }))}
+              required
+            />
+          </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">Descrição</label>
-            <textarea value={form.descricao} onChange={(e) => setForm((p) => ({ ...p, descricao: e.target.value }))} rows={3}
-              className="w-full px-3 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84] resize-none" />
+            <Label htmlFor="descricao" className="mb-1">Descrição</Label>
+            <Textarea
+              id="descricao"
+              value={form.descricao}
+              onChange={(e) => setForm((p) => ({ ...p, descricao: e.target.value }))}
+              rows={3}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {field('Preço (R$) *', 'preco', 'number', true)}
-            {field('Preço Promocional', 'preco_promocional', 'number')}
+            <div>
+              <Label htmlFor="preco" className="mb-1">Preço (R$) *</Label>
+              <Input
+                id="preco"
+                type="number"
+                value={form.preco}
+                onChange={(e) => setForm((p) => ({ ...p, preco: e.target.value }))}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="preco_promocional" className="mb-1">Preço Promocional</Label>
+              <Input
+                id="preco_promocional"
+                type="number"
+                value={form.preco_promocional}
+                onChange={(e) => setForm((p) => ({ ...p, preco_promocional: e.target.value }))}
+              />
+            </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">Categoria</label>
-            <select value={form.categoria_id} onChange={(e) => setForm((p) => ({ ...p, categoria_id: e.target.value }))}
-              className="w-full px-3 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]">
+            <Label htmlFor="categoria" className="mb-1">Categoria</Label>
+            <select
+              id="categoria"
+              value={form.categoria_id}
+              onChange={(e) => setForm((p) => ({ ...p, categoria_id: e.target.value }))}
+              className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-secondary-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-ring transition-colors duration-200"
+            >
               <option value="">Sem categoria</option>
               {categorias.map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}
             </select>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            {field('Estoque', 'estoque', 'number')}
-            {field('Prazo (dias)', 'tempo_producao_dias', 'number')}
-            {field('Peso (g)', 'peso_gramas', 'number')}
+            <div>
+              <Label htmlFor="estoque" className="mb-1">Estoque</Label>
+              <Input
+                id="estoque"
+                type="number"
+                value={form.estoque}
+                onChange={(e) => setForm((p) => ({ ...p, estoque: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label htmlFor="prazo" className="mb-1">Prazo (dias)</Label>
+              <Input
+                id="prazo"
+                type="number"
+                value={form.tempo_producao_dias}
+                onChange={(e) => setForm((p) => ({ ...p, tempo_producao_dias: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label htmlFor="peso" className="mb-1">Peso (g)</Label>
+              <Input
+                id="peso"
+                type="number"
+                value={form.peso_gramas}
+                onChange={(e) => setForm((p) => ({ ...p, peso_gramas: e.target.value }))}
+              />
+            </div>
           </div>
 
           <div className="flex gap-6">
             {[['ativo', 'Ativo'], ['destaque', 'Destaque'], ['mais_vendido', 'Mais Vendido']].map(([key, label]) => (
-              <label key={key} className="flex items-center gap-2 text-sm text-[#5C4A4A] cursor-pointer">
-                <input type="checkbox" checked={form[key as keyof typeof form] as boolean}
+              <label key={key} className="flex items-center gap-2 text-sm text-secondary-foreground cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form[key as keyof typeof form] as boolean}
                   onChange={(e) => setForm((p) => ({ ...p, [key]: e.target.checked }))}
-                  className="accent-[#C97A84]" />
+                  className="accent-primary"
+                />
                 {label}
               </label>
             ))}
           </div>
 
+          <Separator />
+
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-medium uppercase tracking-widest text-[#8A7B7B]">Variantes</label>
-              <button type="button" onClick={addVariante} className="text-xs text-[#C97A84] hover:underline flex items-center gap-1">
+              <Label>Variantes</Label>
+              <button
+                type="button"
+                onClick={addVariante}
+                className="text-xs text-primary hover:underline flex items-center gap-1"
+              >
                 <Plus size={12} /> Adicionar
               </button>
             </div>
             {variantes.map((v, i) => (
               <div key={i} className="flex gap-2 mb-2">
-                <input value={v.nome} onChange={(e) => updateVariante(i, 'nome', e.target.value)}
-                  placeholder="Nome (ex: Tamanho)" className="flex-1 px-3 py-2 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
-                <input value={v.opcoes.join(', ')} onChange={(e) => updateVariante(i, 'opcoes', e.target.value)}
-                  placeholder="Opções (P, M, G)" className="flex-1 px-3 py-2 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
-                <button type="button" onClick={() => removeVariante(i)} className="text-red-400 hover:text-red-600">
+                <Input
+                  value={v.nome}
+                  onChange={(e) => updateVariante(i, 'nome', e.target.value)}
+                  placeholder="Nome (ex: Tamanho)"
+                />
+                <Input
+                  value={v.opcoes.join(', ')}
+                  onChange={(e) => updateVariante(i, 'opcoes', e.target.value)}
+                  placeholder="Opções (P, M, G)"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeVariante(i)}
+                  className="text-destructive hover:text-destructive/80"
+                >
                   <Trash2 size={14} />
                 </button>
               </div>
@@ -190,36 +265,45 @@ export function ProductForm({ produto, onSuccess, onClose }: ProductFormProps) {
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-2">Tags</label>
+            <Label className="mb-2 block">Tags</Label>
             <div className="flex gap-2 mb-2">
-              <input value={tagInput} onChange={(e) => setTagInput(e.target.value)}
+              <Input
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                 placeholder="Digite e pressione Enter"
-                className="flex-1 px-3 py-2 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
-              <button type="button" onClick={addTag} className="px-3 py-2 bg-[#F4C5CB] text-[#A85A65] rounded-lg text-sm">+</button>
+              />
+              <Button type="button" variant="secondary" size="sm" onClick={addTag}>+</Button>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {tags.map((t) => (
-                <span key={t} className="flex items-center gap-1 px-2.5 py-0.5 bg-[#F4C5CB] text-[#A85A65] text-xs rounded-full">
+                <span
+                  key={t}
+                  className="flex items-center gap-1 px-2.5 py-0.5 bg-rosa-100 text-rosa-600 text-xs rounded-full"
+                >
                   {t}
-                  <button type="button" onClick={() => setTags((prev) => prev.filter((x) => x !== t))} className="hover:text-red-500">×</button>
+                  <button
+                    type="button"
+                    onClick={() => setTags((prev) => prev.filter((x) => x !== t))}
+                    className="hover:text-destructive"
+                  >
+                    ×
+                  </button>
                 </span>
               ))}
             </div>
           </div>
 
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose}
-              className="flex-1 py-3 border border-[#EDE0CD] text-[#5C4A4A] text-sm font-medium rounded-lg hover:border-[#C97A84] transition-colors">
+            <Button type="button" variant="outline" size="md" className="flex-1" onClick={onClose}>
               Cancelar
-            </button>
-            <button type="submit" disabled={loading}
-              className="flex-1 py-3 bg-[#C97A84] hover:bg-[#A85A65] disabled:opacity-60 text-white text-sm font-medium rounded-lg transition-colors">
+            </Button>
+            <Button type="submit" disabled={loading} size="md" className="flex-1">
               {loading ? 'Salvando...' : isEdit ? 'Salvar Alterações' : 'Criar Produto'}
-            </button>
+            </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   )
 }

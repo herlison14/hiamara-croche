@@ -2,6 +2,7 @@
 
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { Separator } from '@/components/ui/separator'
 
 interface CheckoutStepsProps {
   currentStep: 1 | 2 | 3
@@ -22,23 +23,26 @@ export function CheckoutSteps({ currentStep, steps }: CheckoutStepsProps) {
               <div
                 className={cn(
                   'w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300',
-                  done && 'bg-[#C97A84] text-white',
-                  active && 'bg-[#C97A84] text-white shadow-[0_0_0_4px_rgba(201,122,132,0.2)]',
-                  !done && !active && 'bg-[#F5EFE6] text-[#8A7B7B] border border-[#EDE0CD]'
+                  done && 'bg-primary text-primary-foreground',
+                  active && 'bg-primary text-primary-foreground shadow-[0_0_0_4px_rgba(201,122,132,0.2)]',
+                  !done && !active && 'bg-secondary text-muted-foreground border border-border'
                 )}
               >
                 {done ? <Check size={16} /> : n}
               </div>
               <div className="text-center mt-2">
-                <p className={cn('text-xs font-medium', active ? 'text-[#C97A84]' : 'text-[#8A7B7B]')}>
+                <p className={cn('text-xs font-medium', active ? 'text-primary' : 'text-muted-foreground')}>
                   {step.label}
                 </p>
-                <p className="text-[10px] text-[#8A7B7B] hidden sm:block">{step.sublabel}</p>
+                <p className="text-[10px] text-muted-foreground hidden sm:block">{step.sublabel}</p>
               </div>
             </div>
 
             {i < steps.length - 1 && (
-              <div className={cn('w-16 sm:w-24 h-0.5 mx-2 mb-8 transition-all duration-300', done ? 'bg-[#C97A84]' : 'bg-[#EDE0CD]')} />
+              <Separator
+                orientation="horizontal"
+                className={cn('w-16 sm:w-24 mx-2 mb-8 transition-all duration-300', done ? 'bg-primary' : 'bg-border')}
+              />
             )}
           </div>
         )

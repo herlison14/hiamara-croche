@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Check, ShoppingBag, Loader2 } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 import toast from 'react-hot-toast'
 import type { Produto } from '@/lib/types'
@@ -30,46 +31,36 @@ export function AddToCartButton({ produto, variante, className, size = 'md' }: A
     setTimeout(() => setState('idle'), 1800)
   }
 
-  const sizes = {
-    sm: 'px-4 py-2 text-xs',
-    md: 'px-6 py-3 text-sm',
-    lg: 'px-8 py-4 text-base',
-  }
-
   if (semEstoque) {
     return (
-      <button
+      <Button
         disabled
-        className={cn(
-          'w-full font-medium uppercase tracking-widest border border-[#EDE0CD] text-[#8A7B7B] rounded-md cursor-not-allowed',
-          sizes[size],
-          className
-        )}
+        variant="outline"
+        size={size}
+        className={cn('w-full cursor-not-allowed', className)}
       >
         Sob Encomenda
-      </button>
+      </Button>
     )
   }
 
   return (
-    <button
+    <Button
       onClick={handleClick}
       disabled={state !== 'idle'}
+      size={size}
       className={cn(
-        'w-full flex items-center justify-center gap-2 font-medium uppercase tracking-widest rounded-md transition-all duration-300',
-        sizes[size],
-        state === 'success'
-          ? 'bg-green-500 text-white'
-          : 'bg-[#C97A84] hover:bg-[#A85A65] text-white shadow-[0_4px_16px_rgba(168,90,101,0.25)] hover:shadow-[0_6px_20px_rgba(168,90,101,0.35)] active:scale-95',
+        'w-full',
+        state === 'success' && 'bg-green-500 hover:bg-green-500 shadow-none',
         className
       )}
     >
-      {state === 'loading' && <Loader2 size={16} className="animate-spin" />}
-      {state === 'success' && <Check size={16} />}
-      {state === 'idle' && <ShoppingBag size={16} />}
+      {state === 'loading' && <Loader2 className="animate-spin" />}
+      {state === 'success' && <Check />}
+      {state === 'idle' && <ShoppingBag />}
       {state === 'loading' && 'Adicionando...'}
       {state === 'success' && 'Adicionado!'}
       {state === 'idle' && 'Adicionar ao Carrinho'}
-    </button>
+    </Button>
   )
 }
