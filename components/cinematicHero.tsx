@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
+import Link from 'next/link'
 
 export function CinematicHero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -121,19 +122,21 @@ export function CinematicHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}
           >
-            <motion.button
-              className="bg-gradient-to-r from-rosa-400 to-rosa-500 hover:from-rosa-500 hover:to-rosa-600 text-white px-10 py-4 rounded-full font-light uppercase tracking-widest text-sm shadow-2xl backdrop-blur-sm"
-              style={{
-                boxShadow: '0 8px 32px rgba(232, 115, 140, 0.4)',
-              }}
-              whileHover={{
-                scale: 1.08,
-                boxShadow: '0 12px 40px rgba(232, 115, 140, 0.6)'
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Explorar Coleção
-            </motion.button>
+            <Link href="/categorias">
+              <motion.span
+                className="inline-block bg-gradient-to-r from-rosa-400 to-rosa-500 hover:from-rosa-500 hover:to-rosa-600 text-white px-10 py-4 rounded-full font-light uppercase tracking-widest text-sm shadow-2xl backdrop-blur-sm cursor-pointer"
+                style={{
+                  boxShadow: '0 8px 32px rgba(232, 115, 140, 0.4)',
+                }}
+                whileHover={{
+                  scale: 1.08,
+                  boxShadow: '0 12px 40px rgba(232, 115, 140, 0.6)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Explorar Coleção
+              </motion.span>
+            </Link>
           </motion.div>
         </div>
       </div>

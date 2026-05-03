@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import Header from '@/components/layout/Header'
 import '@/app/globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -71,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-creme-50 text-texto-medio antialiased">
+        <Header />
         {children}
         <Toaster
           position="bottom-right"

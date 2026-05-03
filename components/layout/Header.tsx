@@ -9,8 +9,8 @@ import { cn } from '@/lib/cn'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/produtos', label: 'Produtos' },
-  { href: '/sobre', label: 'Sobre' },
+  { href: '/categorias', label: 'Categorias' },
+  { href: '/carrinho', label: 'Carrinho' },
 ]
 
 function CrochetNeedleIcon() {

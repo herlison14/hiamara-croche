@@ -1,58 +1,38 @@
-'use client'
-
+import Link from 'next/link'
 import { CinematicProductCard } from './cinematicProductCard'
 import { StaggerContainer, StaggerItem } from './cinematicTransition'
-import { useFirebaseProdutos } from '@/hooks/useFirebaseProdutos'
-import { produtosExemplo } from '@/lib/produtos-exemplo'
+import { categoriasData } from '@/lib/produtos-data'
 
-interface Produto {
-  id: string
-  nome: string
-  slug: string
-  preco: number
-  categoria: { nome: string }
-  fotos: { url: string; alt?: string }[]
-}
+// Pega o primeiro produto de cada categoria para vitrine da home
+const produtosDestaque = categoriasData
+  .filter((cat) => cat.produtos.length > 0)
+  .slice(0, 4)
+  .map((cat) => cat.produtos[0])
 
 export function ProdutosColecao() {
-  const { produtos: firebaseProdutos, loading, error } = useFirebaseProdutos(4)
-
-  // Usar Firebase se disponível, senão usar demo data
-  const produtos = firebaseProdutos.length > 0 ? firebaseProdutos : produtosExemplo
-
-  if (error && process.env.NODE_ENV === 'development') {
-    console.log('ℹ️ Usando dados demo - Firebase não configurado ou erro ao conectar')
-  }
-
-  if (loading) {
-    return (
-      <StaggerContainer staggerDelay={0.15}>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {[...Array(4)].map((_, i) => (
-            <StaggerItem key={i}>
-              <div className="animate-pulse rounded-2xl bg-creme-200 h-96" />
-            </StaggerItem>
-          ))}
-        </div>
-      </StaggerContainer>
-    )
-  }
-
   return (
     <StaggerContainer staggerDelay={0.15}>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {produtos.map((produto, index) => (
+        {produtosDestaque.map((produto, index) => (
           <StaggerItem key={produto.id}>
             <CinematicProductCard
               id={produto.id}
               name={produto.nome}
-              image={produto.fotos?.[0]?.url || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23e8c3c3' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%23a85a65'%3E${encodeURIComponent(produto.nome)}%3C/text%3E%3C/svg%3E`}
+              image={`/produtos/${produto.imagem}`}
               price={produto.preco}
-              category={produto.categoria?.nome || 'Sem categoria'}
+              category={produto.categoria}
               index={index}
             />
           </StaggerItem>
         ))}
+      </div>
+      <div className="mt-10 text-center">
+        <Link
+          href="/categorias"
+          className="inline-block bg-rosa-400 hover:bg-rosa-500 text-white px-10 py-3 rounded-lg font-semibold uppercase tracking-widest text-sm transition-colors"
+        >
+          Ver Toda a Coleção →
+        </Link>
       </div>
     </StaggerContainer>
   )

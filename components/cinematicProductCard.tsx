@@ -7,7 +7,7 @@ interface CinematicProductCardProps {
   id: string
   name: string
   image: string
-  price: number
+  price: number | null
   category: string
   index: number
 }
@@ -84,7 +84,7 @@ export function CinematicProductCard({
           transition={{ duration: 0.6, delay: index * 0.15 }}
         >
           <span className="text-2xl font-bold text-rosa-500">
-            R$ {price.toFixed(2)}
+            {price !== null ? `R$ ${price.toFixed(2)}` : 'SOB CONSULTA'}
           </span>
         </motion.div>
 

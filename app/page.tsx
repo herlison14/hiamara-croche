@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CinematicHero } from '@/components/cinematicHero'
 import { CinematicSection } from '@/components/cinematicSection'
 import { CinematicTransition, StaggerContainer, StaggerItem } from '@/components/cinematicTransition'
@@ -37,9 +38,9 @@ export default function Home() {
                 Acreditamos que a beleza está nos detalhes e que cada peça merece atenção especial.
                 Por isso, não produzimos em massa — cada crochê é pensado para durar gerações.
               </p>
-              <button className="bg-rosa-400 hover:bg-rosa-500 text-white px-8 py-3 rounded-lg font-semibold uppercase tracking-widest text-sm transition-colors">
-                Saber Mais
-              </button>
+              <Link href="/categorias" className="inline-block bg-rosa-400 hover:bg-rosa-500 text-white px-8 py-3 rounded-lg font-semibold uppercase tracking-widest text-sm transition-colors">
+                Ver Produtos
+              </Link>
             </div>
           </CinematicTransition>
         </div>
@@ -105,9 +106,9 @@ export default function Home() {
       >
         <div className="text-center">
           <CinematicTransition delay={0.3}>
-            <button className="bg-rosa-400 hover:bg-rosa-500 text-white px-16 py-4 rounded-lg font-semibold uppercase tracking-widest text-lg transition-colors inline-block">
+            <Link href="/categorias" className="bg-rosa-400 hover:bg-rosa-500 text-white px-16 py-4 rounded-lg font-semibold uppercase tracking-widest text-lg transition-colors inline-block">
               Ver Todos Produtos
-            </button>
+            </Link>
           </CinematicTransition>
         </div>
       </CinematicSection>
@@ -117,9 +118,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 text-center text-texto-medio">
           <p className="font-light">© 2024 HIAMARA CROCHÊ — Feito à mão, entregue com amor</p>
           <div className="mt-4 flex justify-center gap-6">
-            <a href="#" className="hover:text-rosa-400 transition-colors">Instagram</a>
-            <a href="#" className="hover:text-rosa-400 transition-colors">WhatsApp</a>
-            <a href="#" className="hover:text-rosa-400 transition-colors">Contato</a>
+            <a href="https://www.instagram.com/hiamaracroche" target="_blank" rel="noopener noreferrer" className="hover:text-rosa-400 transition-colors">Instagram</a>
+            <a href="https://wa.me/5521997927927" target="_blank" rel="noopener noreferrer" className="hover:text-rosa-400 transition-colors">WhatsApp</a>
+            <Link href="/categorias" className="hover:text-rosa-400 transition-colors">Produtos</Link>
           </div>
         </div>
       </footer>
