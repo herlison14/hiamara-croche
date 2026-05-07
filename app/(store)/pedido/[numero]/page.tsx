@@ -21,35 +21,35 @@ export default function PedidoPage({ params, searchParams }: { params: { numero:
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FDFAF5] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#C97A84] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-creme-50 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-rosa-400 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
   if (!pedido) {
     return (
-      <div className="min-h-screen bg-[#FDFAF5] flex items-center justify-center text-center px-6">
+      <div className="min-h-screen bg-creme-50 flex items-center justify-center text-center px-6">
         <div>
-          <p className="text-xl text-[#5C4A4A]" style={{ fontFamily: 'Cormorant Garamond' }}>Pedido não encontrado</p>
-          <p className="text-sm text-[#8A7B7B] mt-2">Verifique o número e o e-mail informado</p>
+          <p className="font-display text-xl text-texto-medio">Pedido não encontrado</p>
+          <p className="text-sm text-texto-claro mt-2">Verifique o número e o e-mail informado</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFAF5] py-12 px-6">
+    <div className="min-h-screen bg-creme-50 py-12 px-6">
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>
+          <h1 className="font-display text-4xl font-light text-texto-escuro">
             Pedido {pedido.numero}
           </h1>
-          <p className="text-[#8A7B7B] mt-2">Olá, {pedido.cliente_nome}! Acompanhe seu pedido abaixo.</p>
+          <p className="text-texto-claro mt-2">Olá, {pedido.cliente_nome}! Acompanhe seu pedido abaixo.</p>
         </div>
 
-        <div className="bg-white border border-[#EDE0CD] rounded-2xl p-6">
-          <h2 className="text-lg font-medium text-[#3D2B2B] mb-6" style={{ fontFamily: 'Cormorant Garamond' }}>
+        <div className="bg-creme-50 border border-creme-200 rounded-2xl p-6">
+          <h2 className="font-display text-lg font-medium text-texto-escuro mb-6">
             Status do Pedido
           </h2>
           <OrderStatusTracker status={pedido.status} />
@@ -67,17 +67,17 @@ export default function PedidoPage({ params, searchParams }: { params: { numero:
         )}
 
         {pedido.itens && pedido.itens.length > 0 && (
-          <div className="bg-white border border-[#EDE0CD] rounded-2xl p-6 space-y-3">
-            <h2 className="text-lg font-medium text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Itens</h2>
+          <div className="bg-creme-50 border border-creme-200 rounded-2xl p-6 space-y-3">
+            <h2 className="font-display text-lg font-medium text-texto-escuro">Itens</h2>
             {pedido.itens.map((item) => (
-              <div key={item.id} className="flex justify-between text-sm text-[#5C4A4A]">
+              <div key={item.id} className="flex justify-between text-sm text-texto-medio">
                 <span>{item.produto_nome} × {item.quantidade}</span>
                 <span>R$ {item.subtotal.toFixed(2).replace('.', ',')}</span>
               </div>
             ))}
-            <div className="border-t border-[#EDE0CD] pt-3 flex justify-between font-medium text-[#3D2B2B]">
+            <div className="border-t border-creme-200 pt-3 flex justify-between font-medium text-texto-escuro">
               <span>Total</span>
-              <span className="text-[#A85A65]" style={{ fontFamily: 'Cormorant Garamond' }}>
+              <span className="font-display text-rosa-500">
                 R$ {pedido.total.toFixed(2).replace('.', ',')}
               </span>
             </div>

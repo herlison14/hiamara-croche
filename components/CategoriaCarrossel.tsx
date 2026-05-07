@@ -4,7 +4,8 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import type { CategoriaData, ProdutoData } from '@/lib/produtos-data'
+import { Button } from '@/components/ui/button'
+import type { CategoriaData } from '@/lib/produtos-data'
 
 interface CategoriaCarrosselProps {
   categoria: CategoriaData
@@ -39,9 +40,9 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
         className="group cursor-pointer"
         onClick={() => setModalAberto(true)}
       >
-        <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl bg-creme-50 border border-creme-200 shadow-[0_2px_12px_rgba(61,43,43,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(61,43,43,0.12)]">
           {/* Imagem */}
-          <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
+          <div className="relative aspect-[3/4] overflow-hidden bg-creme-100">
             <Image
               src={`/produtos/${primeiroProduto.imagem}`}
               alt={primeiroProduto.nome}
@@ -51,36 +52,34 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
 
-          {/* Badge Sem Categoria */}
+          {/* Badge Categoria */}
           <div className="absolute right-3 top-3">
-            <span className="inline-block rounded-full bg-rose-400 px-3 py-1 text-xs font-bold text-white">
+            <span className="inline-block rounded-full bg-rosa-400 px-3 py-1 text-xs font-medium text-white uppercase tracking-wider">
               {categoria.nomeExibicao}
             </span>
           </div>
 
           {/* Info */}
           <div className="relative p-6">
-            <h3 className="text-xl font-light text-gray-800 mb-2">
+            <h3 className="font-display text-xl font-light text-texto-escuro mb-2">
               {primeiroProduto.nome}
             </h3>
-            <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+            <p className="text-sm text-texto-claro mb-4 line-clamp-2">
               {primeiroProduto.descricao}
             </p>
-            <div className="text-2xl font-bold text-rose-600 mb-4">
+            <div className="font-display text-2xl font-semibold text-rosa-500 mb-4">
               {formatarPreco(primeiroProduto.preco)}
             </div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setModalAberto(true)
-              }}
-              className="w-full rounded-lg bg-rose-500 px-4 py-3 font-bold text-white transition-colors duration-300 hover:bg-rose-600"
+            <Button
+              onClick={(e) => { e.stopPropagation(); setModalAberto(true) }}
+              className="w-full"
+              size="md"
             >
               VER DETALHES
-            </button>
+            </Button>
 
-            {/* Contador de itens */}
-            <div className="mt-4 text-center text-xs text-gray-400">
+            {/* Contador */}
+            <div className="mt-4 text-center text-xs text-texto-claro">
               {categoria.produtos.length} item{categoria.produtos.length !== 1 ? 'ns' : ''} disponível{categoria.produtos.length !== 1 ? 's' : ''}
             </div>
           </div>
@@ -101,17 +100,17 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full max-w-2xl rounded-2xl bg-white"
+              className="relative w-full max-w-2xl rounded-2xl bg-creme-50 border border-creme-200"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-                <h2 className="text-2xl font-light text-gray-800">
+              <div className="border-b border-creme-200 px-6 py-4 flex items-center justify-between">
+                <h2 className="font-display text-2xl font-light text-texto-escuro">
                   {categoria.nomeExibicao}
                 </h2>
                 <button
                   onClick={() => setModalAberto(false)}
-                  className="text-gray-400 transition-colors hover:text-gray-600"
+                  className="text-texto-claro transition-colors hover:text-texto-escuro"
                 >
                   <X size={24} />
                 </button>
@@ -127,7 +126,7 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="relative aspect-square overflow-hidden rounded-xl bg-gray-100"
+                    className="relative aspect-square overflow-hidden rounded-xl bg-creme-100"
                   >
                     <Image
                       src={`/produtos/${produtoAtual.imagem}`}
@@ -147,36 +146,33 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                     className="flex flex-col justify-between"
                   >
                     <div>
-                      <h3 className="text-2xl font-light text-gray-800 mb-2">
+                      <h3 className="font-display text-2xl font-light text-texto-escuro mb-2">
                         {produtoAtual.nome}
                       </h3>
-                      <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                      <p className="text-texto-medio mb-6 text-sm leading-relaxed">
                         {produtoAtual.descricao}
                       </p>
 
-                      {/* Detalhes */}
                       <div className="space-y-4 mb-6">
                         {produtoAtual.materiais && (
                           <div>
-                            <p className="text-xs uppercase tracking-wider text-gray-400 mb-1">
+                            <p className="text-xs uppercase tracking-wider text-texto-claro mb-1">
                               Materiais
                             </p>
-                            <p className="text-gray-700">
-                              {produtoAtual.materiais}
-                            </p>
+                            <p className="text-texto-medio">{produtoAtual.materiais}</p>
                           </div>
                         )}
 
                         {produtoAtual.tamanhos && produtoAtual.tamanhos.length > 0 && (
                           <div>
-                            <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">
+                            <p className="text-xs uppercase tracking-wider text-texto-claro mb-2">
                               Tamanhos
                             </p>
                             <div className="flex gap-2">
                               {produtoAtual.tamanhos.map((tamanho) => (
                                 <span
                                   key={tamanho}
-                                  className="rounded border border-gray-300 px-3 py-1 text-sm text-gray-700"
+                                  className="rounded border border-creme-200 px-3 py-1 text-sm text-texto-medio"
                                 >
                                   {tamanho}
                                 </span>
@@ -187,20 +183,19 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                       </div>
 
                       {/* Preço */}
-                      <div className="mb-6 rounded-lg bg-gray-50 p-4">
-                        <p className="text-xs uppercase tracking-wider text-gray-400 mb-1">
+                      <div className="mb-6 rounded-lg bg-creme-100 p-4">
+                        <p className="text-xs uppercase tracking-wider text-texto-claro mb-1">
                           Preço
                         </p>
-                        <p className="text-3xl font-bold text-rose-600">
+                        <p className="font-display text-3xl font-semibold text-rosa-500">
                           {formatarPreco(produtoAtual.preco)}
                         </p>
                       </div>
                     </div>
 
-                    {/* CTA */}
-                    <button className="w-full rounded-lg bg-rose-500 px-4 py-3 font-bold text-white transition-colors hover:bg-rose-600">
+                    <Button className="w-full" size="md">
                       Adicionar ao Carrinho
-                    </button>
+                    </Button>
                   </motion.div>
                 </div>
 
@@ -208,19 +203,18 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                 <div className="mt-8 flex items-center justify-between">
                   <button
                     onClick={voltar}
-                    className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-800"
+                    className="rounded-full p-2 text-texto-medio transition-colors hover:bg-creme-100 hover:text-texto-escuro"
                   >
                     <ChevronLeft size={24} />
                   </button>
 
-                  {/* Indicador */}
                   <div className="flex items-center gap-2">
                     {categoria.produtos.map((_, idx) => (
                       <motion.button
                         key={idx}
                         onClick={() => setIndexAtual(idx)}
                         className={`h-2 rounded-full transition-all ${
-                          idx === indexAtual ? 'bg-rose-500 w-8' : 'bg-gray-300 w-2'
+                          idx === indexAtual ? 'bg-rosa-400 w-8' : 'bg-creme-200 w-2'
                         }`}
                         whileHover={{ scale: 1.1 }}
                       />
@@ -229,14 +223,13 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
 
                   <button
                     onClick={avancar}
-                    className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-800"
+                    className="rounded-full p-2 text-texto-medio transition-colors hover:bg-creme-100 hover:text-texto-escuro"
                   >
                     <ChevronRight size={24} />
                   </button>
                 </div>
 
-                {/* Contador */}
-                <div className="mt-4 text-center text-sm text-gray-500">
+                <div className="mt-4 text-center text-sm text-texto-claro">
                   {indexAtual + 1} de {categoria.produtos.length}
                 </div>
               </div>

@@ -6,6 +6,10 @@ import { useCartStore } from '@/store/cartStore'
 import { CheckoutSteps } from '@/components/store/CheckoutSteps'
 import { PixQRCode } from '@/components/store/PixQRCode'
 import { useViaCep } from '@/hooks/useViaCep'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
 import toast from 'react-hot-toast'
 import type { DadosCheckout } from '@/lib/types'
 
@@ -127,9 +131,9 @@ export default function CheckoutPage() {
 
   if (pixData) {
     return (
-      <div className="min-h-screen bg-[#FDFAF5] py-16 px-6">
+      <div className="min-h-screen bg-creme-50 py-16 px-6">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-3xl font-light text-[#3D2B2B] text-center mb-8" style={{ fontFamily: 'Cormorant Garamond' }}>
+          <h1 className="font-display text-3xl font-light text-texto-escuro text-center mb-8">
             Quase lá! Finalize o pagamento
           </h1>
           <PixQRCode
@@ -147,104 +151,132 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFAF5] py-12 px-6">
+    <div className="min-h-screen bg-creme-50 py-12 px-6">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-light text-[#3D2B2B] text-center mb-8" style={{ fontFamily: 'Cormorant Garamond' }}>
+        <h1 className="font-display text-4xl font-light text-texto-escuro text-center mb-8">
           Finalizar Compra
         </h1>
 
         <CheckoutSteps currentStep={step} steps={STEPS} />
 
         {step === 1 && (
-          <form onSubmit={handleStep1} className="space-y-4 bg-white border border-[#EDE0CD] rounded-2xl p-6">
-            <h2 className="text-xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Seus Dados</h2>
+          <form onSubmit={handleStep1} className="space-y-4 bg-creme-50 border border-creme-200 rounded-2xl p-6">
+            <h2 className="font-display text-xl font-light text-texto-escuro">Seus Dados</h2>
             {[
               { name: 'nome', label: 'Nome Completo', type: 'text', required: true },
               { name: 'email', label: 'E-mail', type: 'email', required: true },
               { name: 'telefone', label: 'WhatsApp / Telefone', type: 'tel', required: false },
             ].map((f) => (
               <div key={f.name}>
-                <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">{f.label}</label>
-                <input name={f.name} type={f.type} required={f.required} defaultValue={(dados as Record<string, string>)[f.name] ?? ''}
-                  className="w-full px-4 py-3 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84] focus:ring-[3px] focus:ring-[rgba(201,122,132,0.15)]" />
+                <Label htmlFor={f.name} className="mb-1">{f.label}</Label>
+                <Input
+                  id={f.name}
+                  name={f.name}
+                  type={f.type}
+                  required={f.required}
+                  defaultValue={(dados as Record<string, string>)[f.name] ?? ''}
+                />
               </div>
             ))}
-            <button type="submit" className="w-full py-3.5 bg-[#C97A84] hover:bg-[#A85A65] text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
-              Continuar
-            </button>
+            <Button type="submit" size="md" className="w-full">Continuar</Button>
           </form>
         )}
 
         {step === 2 && (
-          <form id="form-endereco" onSubmit={handleStep2} className="space-y-4 bg-white border border-[#EDE0CD] rounded-2xl p-6">
-            <h2 className="text-xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Endereço de Entrega</h2>
+          <form id="form-endereco" onSubmit={handleStep2} className="space-y-4 bg-creme-50 border border-creme-200 rounded-2xl p-6">
+            <h2 className="font-display text-xl font-light text-texto-escuro">Endereço de Entrega</h2>
             <div>
-              <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">CEP</label>
-              <input name="cep" type="text" required placeholder="00000-000" maxLength={9}
+              <Label htmlFor="cep" className="mb-1">CEP</Label>
+              <Input
+                id="cep"
+                name="cep"
+                type="text"
+                required
+                placeholder="00000-000"
+                maxLength={9}
                 onChange={(e) => { if (e.target.value.replace(/\D/g, '').length === 8) handleCep(e.target.value) }}
-                className="w-full px-4 py-3 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
-              {cepLoading && <p className="text-xs text-[#8A7B7B] mt-1">Buscando CEP...</p>}
+              />
+              {cepLoading && <p className="text-xs text-texto-claro mt-1">Buscando CEP...</p>}
             </div>
-            {[
-              { name: 'rua', label: 'Rua / Logradouro', full: true },
-              { name: 'numero', label: 'Número', full: false },
-              { name: 'complemento', label: 'Complemento', full: false },
-              { name: 'bairro', label: 'Bairro', full: false },
-              { name: 'cidade', label: 'Cidade', full: false },
-              { name: 'estado', label: 'Estado (UF)', full: false },
-            ].map((f) => (
-              <div key={f.name} className={f.full ? '' : 'inline-block w-1/2 pr-2'}>
-                <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">{f.label}</label>
-                <input name={f.name} type="text"
-                  className="w-full px-4 py-3 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]" />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="col-span-2">
+                <Label htmlFor="rua" className="mb-1">Rua / Logradouro</Label>
+                <Input id="rua" name="rua" type="text" />
               </div>
-            ))}
+              <div>
+                <Label htmlFor="numero" className="mb-1">Número</Label>
+                <Input id="numero" name="numero" type="text" />
+              </div>
+              <div>
+                <Label htmlFor="complemento" className="mb-1">Complemento</Label>
+                <Input id="complemento" name="complemento" type="text" />
+              </div>
+              <div>
+                <Label htmlFor="bairro" className="mb-1">Bairro</Label>
+                <Input id="bairro" name="bairro" type="text" />
+              </div>
+              <div>
+                <Label htmlFor="cidade" className="mb-1">Cidade</Label>
+                <Input id="cidade" name="cidade" type="text" />
+              </div>
+              <div>
+                <Label htmlFor="estado" className="mb-1">Estado (UF)</Label>
+                <Input id="estado" name="estado" type="text" />
+              </div>
+            </div>
             <div>
-              <label className="block text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-1">Observações</label>
-              <textarea name="observacoes" rows={2} className="w-full px-4 py-3 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84] resize-none" />
+              <Label htmlFor="observacoes" className="mb-1">Observações</Label>
+              <Textarea id="observacoes" name="observacoes" rows={2} />
             </div>
             <div className="flex gap-3">
-              <button type="button" onClick={() => setStep(1)} className="flex-1 py-3.5 border border-[#EDE0CD] text-[#5C4A4A] text-sm font-medium uppercase tracking-widest rounded-md hover:border-[#C97A84] transition-all">
+              <Button type="button" variant="outline" size="md" className="flex-1" onClick={() => setStep(1)}>
                 Voltar
-              </button>
-              <button type="submit" className="flex-1 py-3.5 bg-[#C97A84] hover:bg-[#A85A65] text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
-                Continuar
-              </button>
+              </Button>
+              <Button type="submit" size="md" className="flex-1">Continuar</Button>
             </div>
           </form>
         )}
 
         {step === 3 && (
           <div className="space-y-4">
-            <div className="bg-white border border-[#EDE0CD] rounded-2xl p-6 space-y-3">
-              <h2 className="text-xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Revisão do Pedido</h2>
+            <div className="bg-creme-50 border border-creme-200 rounded-2xl p-6 space-y-3">
+              <h2 className="font-display text-xl font-light text-texto-escuro">Revisão do Pedido</h2>
               {items.map((item) => (
-                <div key={item.produto.id} className="flex justify-between text-sm text-[#5C4A4A]">
+                <div key={item.produto.id} className="flex justify-between text-sm text-texto-medio">
                   <span>{item.produto.nome} × {item.quantidade}</span>
                   <span>R$ {((item.produto.preco_promocional ?? item.produto.preco) * item.quantidade).toFixed(2).replace('.', ',')}</span>
                 </div>
               ))}
-              <div className="border-t border-[#EDE0CD] pt-3 space-y-1 text-sm">
-                <div className="flex justify-between text-[#5C4A4A]"><span>Subtotal</span><span>R$ {subtotal.toFixed(2).replace('.', ',')}</span></div>
-                <div className="flex justify-between text-[#5C4A4A]"><span>Frete</span><span>{frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`}</span></div>
-                <div className="flex justify-between font-semibold text-[#3D2B2B] text-base pt-1">
+              <div className="border-t border-creme-200 pt-3 space-y-1 text-sm">
+                <div className="flex justify-between text-texto-medio">
+                  <span>Subtotal</span>
+                  <span>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
+                </div>
+                <div className="flex justify-between text-texto-medio">
+                  <span>Frete</span>
+                  <span>{frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`}</span>
+                </div>
+                <div className="flex justify-between font-semibold text-texto-escuro text-base pt-1">
                   <span>Total</span>
-                  <span className="text-[#A85A65]" style={{ fontFamily: 'Cormorant Garamond' }}>R$ {totalFinal.toFixed(2).replace('.', ',')}</span>
+                  <span className="font-display text-rosa-500">
+                    R$ {totalFinal.toFixed(2).replace('.', ',')}
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => setStep(2)} className="flex-1 py-3.5 border border-[#EDE0CD] text-[#5C4A4A] text-sm font-medium uppercase tracking-widest rounded-md hover:border-[#C97A84] transition-all">
+              <Button type="button" variant="outline" size="md" className="flex-1" onClick={() => setStep(2)}>
                 Voltar
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleFinalizarPedido}
                 disabled={loading}
-                className="flex-1 py-3.5 bg-[#C97A84] hover:bg-[#A85A65] disabled:opacity-60 text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300"
+                size="md"
+                className="flex-1"
               >
                 {loading ? 'Gerando PIX...' : 'Gerar PIX e Finalizar'}
-              </button>
+              </Button>
             </div>
           </div>
         )}
