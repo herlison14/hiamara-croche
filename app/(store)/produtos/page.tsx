@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { TabsFiltro } from '@/components/TabsFiltro'
-import { getCategorias } from '@/lib/supabase'
+import { fetchProdutoosAction } from '@/lib/produtos-actions'
 
 export const metadata = { title: 'Catálogo — HIAMARA CROCHÊ' }
 
@@ -8,17 +8,12 @@ interface Props {
   searchParams: Promise<{ categoria?: string; busca?: string }>
 }
 
-const CATS_FALLBACK = [
-  { id: '1', slug: 'vestuario', nome: 'Vestuário Premium', ativo: true },
-  { id: '2', slug: 'amigurumi', nome: 'Amigurumi & Colecionáveis', ativo: true },
-  { id: '3', slug: 'decoracao', nome: 'Home & Decor', ativo: true },
-  { id: '4', slug: 'acessorios', nome: 'Acessórios', ativo: true },
-]
-
 export default async function ProdutosPage({ searchParams }: Props) {
   const { categoria, busca } = await searchParams
-  const categorias = await getCategorias().catch(() => [])
-  const categoriasFiltered = categorias && categorias.length > 0 ? categorias : CATS_FALLBACK
+  const produtos = await fetchProdutoosAction({})
+  const categorias = [...new Set(produtos.map((p) => p.categoria).filter(Boolean))]
+    .sort()
+    .map((cat) => ({ id: cat, slug: cat.toLowerCase(), nome: cat }))
 
   return (
     <div className="min-h-screen bg-creme-50">
@@ -51,7 +46,7 @@ export default async function ProdutosPage({ searchParams }: Props) {
               >
                 Todos
               </a>
-              {categoriasFiltered.map((cat) => (
+              {categorias.map((cat) => (
                 <a
                   key={cat.id}
                   href={`/produtos?categoria=${cat.slug}`}

@@ -1,14 +1,39 @@
 import { Metadata } from 'next'
 import { CategoriaCarrossel } from '@/components/CategoriaCarrossel'
-import { categoriasData } from '@/lib/produtos-data'
-import Link from 'next/link'
+import { fetchProdutoosAction } from '@/lib/produtos-actions'
+import type { CategoriaData, ProdutoData } from '@/lib/produtos-data'
 
 export const metadata: Metadata = {
   title: 'Categorias — HIAMARA CROCHÊ',
   description: 'Explore nossas categorias de produtos em crochê'
 }
 
-export default function CategoriasPage() {
+export default async function CategoriasPage() {
+  const produtos = await fetchProdutoosAction({})
+
+  const categoriaMap = new Map<string, ProdutoData[]>()
+  for (const p of produtos) {
+    if (!p.ativo) continue
+    const cat = p.categoria
+    if (!categoriaMap.has(cat)) categoriaMap.set(cat, [])
+    categoriaMap.get(cat)!.push({
+      id: p.id,
+      nome: p.nome,
+      descricao: p.descricao,
+      categoria: p.categoria,
+      preco: p.preco,
+      imagem: p.fotos?.[0]?.url ?? '',
+    })
+  }
+
+  const categorias: CategoriaData[] = [...categoriaMap.entries()].map(([nome, prods]) => ({
+    id: nome.toLowerCase(),
+    nome: nome.toLowerCase(),
+    nomeExibicao: nome,
+    descricao: `Produtos da categoria ${nome}`,
+    produtos: prods,
+  }))
+
   return (
     <div className="min-h-screen bg-creme-50">
       {/* Header */}
@@ -29,14 +54,18 @@ export default function CategoriasPage() {
 
       {/* Grid de Categorias */}
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categoriasData.map((categoria) => (
-            <CategoriaCarrossel
-              key={categoria.id}
-              categoria={categoria}
-            />
-          ))}
-        </div>
+        {categorias.length === 0 ? (
+          <p className="text-center text-texto-medio py-20">Carregando categorias...</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categorias.map((categoria) => (
+              <CategoriaCarrossel
+                key={categoria.id}
+                categoria={categoria}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* CTA Final */}

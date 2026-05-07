@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface CinematicProductCardProps {
-  id: string
+  slug: string
   name: string
   image: string
   price: number | null
@@ -13,7 +14,7 @@ interface CinematicProductCardProps {
 }
 
 export function CinematicProductCard({
-  id,
+  slug,
   name,
   image,
   price,
@@ -89,13 +90,15 @@ export function CinematicProductCard({
         </motion.div>
 
         {/* CTA Button com efeito de expansão */}
-        <motion.button
-          className="w-full bg-rosa-400 hover:bg-rosa-500 text-white py-3 rounded-lg font-semibold uppercase tracking-wide text-sm transition-colors"
-          whileHover={{ backgroundColor: '#A85A65' }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Ver Detalhes
-        </motion.button>
+        <Link href={`/produto/${slug}`}>
+          <motion.div
+            className="w-full bg-rosa-400 hover:bg-rosa-500 text-white py-3 rounded-lg font-semibold uppercase tracking-wide text-sm text-center transition-colors cursor-pointer"
+            whileHover={{ backgroundColor: '#A85A65' }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Ver Detalhes
+          </motion.div>
+        </Link>
       </div>
 
       {/* Efeito de borda animada no hover */}

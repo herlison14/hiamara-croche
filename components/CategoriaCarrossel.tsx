@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { CategoriaData } from '@/lib/produtos-data'
+// NOTE: imagem field accepts full URLs (Firebase) or local paths (/produtos/...)
+
 
 interface CategoriaCarrosselProps {
   categoria: CategoriaData
@@ -44,7 +46,7 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
           {/* Imagem */}
           <div className="relative aspect-[3/4] overflow-hidden bg-creme-100">
             <Image
-              src={`/produtos/${primeiroProduto.imagem}`}
+              src={primeiroProduto.imagem}
               alt={primeiroProduto.nome}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -129,7 +131,7 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                     className="relative aspect-square overflow-hidden rounded-xl bg-creme-100"
                   >
                     <Image
-                      src={`/produtos/${produtoAtual.imagem}`}
+                      src={produtoAtual.imagem}
                       alt={produtoAtual.nome}
                       fill
                       className="object-cover"

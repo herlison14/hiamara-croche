@@ -29,38 +29,6 @@ export function CinematicTransition({
   )
 }
 
-export function SmoothFadeIn({
-  children,
-  delay = 0,
-}: {
-  children: React.ReactNode
-  delay?: number
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-export function ScaleInOnScroll({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 export function StaggerContainer({
   children,
   staggerDelay = 0.1,
