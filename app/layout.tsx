@@ -78,14 +78,14 @@ export default function RootLayout({
           position="bottom-right"
           toastOptions={{
             style: {
-              background: '#FDFAF5',
-              color: '#3D2B2B',
-              border: '1px solid #EDE0CD',
+              background: 'hsl(var(--background))',
+              color: 'hsl(var(--foreground))',
+              border: '1px solid hsl(var(--border))',
               fontFamily: 'DM Sans, sans-serif',
               fontSize: '14px',
             },
             success: {
-              iconTheme: { primary: '#C97A84', secondary: '#FDFAF5' },
+              iconTheme: { primary: 'hsl(var(--primary))', secondary: 'hsl(var(--background))' },
             },
           }}
         />

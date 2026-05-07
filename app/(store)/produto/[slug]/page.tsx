@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { fetchProdutoosAction, type Produto as FirebaseProduto } from '@/lib/produtos-actions'
 import { notFound } from 'next/navigation'
 import { AddToCartButton } from '@/components/store/AddToCartButton'
+import { ProductGallery } from '@/components/store/ProductGallery'
 import type { Produto } from '@/lib/types'
 
 interface Props {
@@ -72,25 +73,11 @@ export default async function ProdutoPage({ params }: Props) {
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-4">
-            {produto.fotos?.[0] && (
-              <div className="aspect-square rounded-2xl overflow-hidden bg-creme-100">
-                <img
-                  src={produto.fotos[0].url}
-                  alt={produto.fotos[0].alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            {produto.fotos && produto.fotos.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
-                {produto.fotos.slice(1).map((foto, i) => (
-                  <div key={i} className="aspect-square rounded-lg overflow-hidden bg-creme-100">
-                    <img src={foto.url} alt={foto.alt} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-            )}
+          <div>
+            {produto.fotos && produto.fotos.length > 0
+              ? <ProductGallery fotos={produto.fotos} />
+              : <div className="aspect-square rounded-2xl bg-creme-100 flex items-center justify-center"><span className="font-display text-8xl font-light text-rosa-200">{produto.nome[0]}</span></div>
+            }
           </div>
 
           <div className="space-y-6">

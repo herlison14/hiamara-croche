@@ -44,49 +44,49 @@ export default function AdminPedidoDetalhePage() {
     }
   }
 
-  if (loading) return <div className="p-8 text-center text-[#8A7B7B]">Carregando...</div>
-  if (!pedido) return <div className="p-8 text-center text-[#8A7B7B]">Pedido não encontrado</div>
+  if (loading) return <div className="p-8 text-center text-texto-claro">Carregando...</div>
+  if (!pedido) return <div className="p-8 text-center text-texto-claro">Pedido não encontrado</div>
 
   return (
     <div className="space-y-6 max-w-2xl">
       <div className="flex items-center gap-4">
-        <Link href="/admin/pedidos" className="text-[#8A7B7B] hover:text-[#C97A84]"><ArrowLeft size={20} /></Link>
+        <Link href="/admin/pedidos" className="text-texto-claro hover:text-rosa-400 transition-colors"><ArrowLeft size={20} /></Link>
         <div>
-          <h1 className="text-3xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>
+          <h1 className="font-display text-3xl font-light text-texto-escuro">
             Pedido {pedido.numero}
           </h1>
-          <p className="text-sm text-[#8A7B7B]">{new Date(pedido.criado_em).toLocaleString('pt-BR')}</p>
+          <p className="text-sm text-texto-claro">{new Date(pedido.criado_em).toLocaleString('pt-BR')}</p>
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">
-        <div className="bg-white border border-[#EDE0CD] rounded-2xl p-5 space-y-2">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-[#8A7B7B]">Cliente</h2>
-          <p className="font-medium text-[#3D2B2B]">{pedido.cliente_nome}</p>
-          <p className="text-sm text-[#5C4A4A]">{pedido.cliente_email}</p>
-          {pedido.cliente_telefone && <p className="text-sm text-[#5C4A4A]">{pedido.cliente_telefone}</p>}
+        <div className="bg-creme-50 border border-creme-200 rounded-2xl p-5 space-y-2">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-texto-claro">Cliente</h2>
+          <p className="font-medium text-texto-escuro">{pedido.cliente_nome}</p>
+          <p className="text-sm text-texto-medio">{pedido.cliente_email}</p>
+          {pedido.cliente_telefone && <p className="text-sm text-texto-medio">{pedido.cliente_telefone}</p>}
         </div>
 
         {pedido.endereco_cidade && (
-          <div className="bg-white border border-[#EDE0CD] rounded-2xl p-5 space-y-2">
-            <h2 className="text-sm font-medium uppercase tracking-widest text-[#8A7B7B]">Endereço</h2>
-            <p className="text-sm text-[#5C4A4A]">{pedido.endereco_rua}, {pedido.endereco_numero}</p>
-            {pedido.endereco_complemento && <p className="text-sm text-[#5C4A4A]">{pedido.endereco_complemento}</p>}
-            <p className="text-sm text-[#5C4A4A]">{pedido.endereco_bairro} — {pedido.endereco_cidade}/{pedido.endereco_estado}</p>
-            <p className="text-sm text-[#5C4A4A]">CEP: {pedido.endereco_cep}</p>
+          <div className="bg-creme-50 border border-creme-200 rounded-2xl p-5 space-y-2">
+            <h2 className="text-sm font-medium uppercase tracking-widest text-texto-claro">Endereço</h2>
+            <p className="text-sm text-texto-medio">{pedido.endereco_rua}, {pedido.endereco_numero}</p>
+            {pedido.endereco_complemento && <p className="text-sm text-texto-medio">{pedido.endereco_complemento}</p>}
+            <p className="text-sm text-texto-medio">{pedido.endereco_bairro} — {pedido.endereco_cidade}/{pedido.endereco_estado}</p>
+            <p className="text-sm text-texto-medio">CEP: {pedido.endereco_cep}</p>
           </div>
         )}
       </div>
 
-      <div className="bg-white border border-[#EDE0CD] rounded-2xl p-5">
-        <h2 className="text-sm font-medium uppercase tracking-widest text-[#8A7B7B] mb-4">Status do Pedido</h2>
+      <div className="bg-creme-50 border border-creme-200 rounded-2xl p-5">
+        <h2 className="text-sm font-medium uppercase tracking-widest text-texto-claro mb-4">Status do Pedido</h2>
         <OrderStatusTracker status={pedido.status} />
-        <div className="mt-5 pt-5 border-t border-[#EDE0CD]">
-          <label className="text-xs font-medium uppercase tracking-widest text-[#8A7B7B]">Alterar Status</label>
+        <div className="mt-5 pt-5 border-t border-creme-200">
+          <label className="text-xs font-medium uppercase tracking-widest text-texto-claro">Alterar Status</label>
           <select
             value={pedido.status}
             onChange={(e) => atualizarStatus(e.target.value as StatusPedido)}
-            className="w-full mt-1 px-4 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]"
+            className="w-full mt-1 px-4 py-2.5 border border-creme-200 rounded-lg text-sm text-texto-medio focus:outline-none focus:border-rosa-300 bg-creme-50"
           >
             {Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
@@ -94,41 +94,41 @@ export default function AdminPedidoDetalhePage() {
       </div>
 
       {pedido.itens && pedido.itens.length > 0 && (
-        <div className="bg-white border border-[#EDE0CD] rounded-2xl p-5 space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-[#8A7B7B]">Itens</h2>
+        <div className="bg-creme-50 border border-creme-200 rounded-2xl p-5 space-y-3">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-texto-claro">Itens</h2>
           {pedido.itens.map((item) => (
-            <div key={item.id} className="flex justify-between items-center py-2 border-b border-[#F5EFE6] last:border-0">
+            <div key={item.id} className="flex justify-between items-center py-2 border-b border-creme-100 last:border-0">
               <div>
-                <p className="font-medium text-[#3D2B2B]">{item.produto_nome}</p>
+                <p className="font-medium text-texto-escuro">{item.produto_nome}</p>
                 {item.variante_selecionada && (
-                  <p className="text-xs text-[#8A7B7B]">
+                  <p className="text-xs text-texto-claro">
                     {Object.entries(item.variante_selecionada).map(([k, v]) => `${k}: ${v}`).join(' · ')}
                   </p>
                 )}
-                <p className="text-xs text-[#8A7B7B]">Qtd: {item.quantidade}</p>
+                <p className="text-xs text-texto-claro">Qtd: {item.quantidade}</p>
               </div>
-              <p className="font-medium text-[#A85A65]">R$ {Number(item.subtotal).toFixed(2).replace('.', ',')}</p>
+              <p className="font-medium text-rosa-500">R$ {Number(item.subtotal).toFixed(2).replace('.', ',')}</p>
             </div>
           ))}
           <div className="flex justify-between pt-2">
-            <span className="font-medium text-[#3D2B2B]">Total</span>
-            <span className="text-xl font-light text-[#A85A65]" style={{ fontFamily: 'Cormorant Garamond' }}>
+            <span className="font-medium text-texto-escuro">Total</span>
+            <span className="font-display text-xl font-light text-rosa-500">
               R$ {Number(pedido.total).toFixed(2).replace('.', ',')}
             </span>
           </div>
         </div>
       )}
 
-      <div className="bg-white border border-[#EDE0CD] rounded-2xl p-5 space-y-2">
-        <h2 className="text-sm font-medium uppercase tracking-widest text-[#8A7B7B]">Pagamento</h2>
+      <div className="bg-creme-50 border border-creme-200 rounded-2xl p-5 space-y-2">
+        <h2 className="text-sm font-medium uppercase tracking-widest text-texto-claro">Pagamento</h2>
         <div className="flex items-center gap-3">
           <span className={`text-xs px-3 py-1 rounded-full font-medium ${pedido.pagamento_status === 'aprovado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
             {pedido.pagamento_status}
           </span>
-          {pedido.pagamento_id && <span className="text-xs text-[#8A7B7B]">ID: {pedido.pagamento_id}</span>}
+          {pedido.pagamento_id && <span className="text-xs text-texto-claro">ID: {pedido.pagamento_id}</span>}
         </div>
         {pedido.pagamento_confirmado_em && (
-          <p className="text-xs text-[#8A7B7B]">Confirmado em: {new Date(pedido.pagamento_confirmado_em).toLocaleString('pt-BR')}</p>
+          <p className="text-xs text-texto-claro">Confirmado em: {new Date(pedido.pagamento_confirmado_em).toLocaleString('pt-BR')}</p>
         )}
       </div>
 

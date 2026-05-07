@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 interface TabsFiltroProps {
   categoria?: string
   abaInicial?: string
+  busca?: string
 }
 
 const ABAS = [
@@ -20,7 +21,7 @@ const ABAS = [
 
 type AbaId = typeof ABAS[number]['id']
 
-export function TabsFiltro({ categoria, abaInicial = 'todos' }: TabsFiltroProps) {
+export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltroProps) {
   const [produtos, setProdutos] = useState<Produto[]>([])
   const [carregando, setCarregando] = useState(true)
   const [abaAtiva, setAbaAtiva] = useState<AbaId>(abaInicial as AbaId)
@@ -49,10 +50,13 @@ export function TabsFiltro({ categoria, abaInicial = 'todos' }: TabsFiltroProps)
   }
 
   const produtosFiltrados = produtos.filter((p) => {
-    if (abaAtiva === 'todos') return true
-    if (abaAtiva === 'destaque') return p.destaque
-    if (abaAtiva === 'novo') return p.novo
-    if (abaAtiva === 'mais_vendido') return p.mais_vendido
+    if (abaAtiva === 'destaque' && !p.destaque) return false
+    if (abaAtiva === 'novo' && !p.novo) return false
+    if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
+    if (busca) {
+      const q = busca.toLowerCase()
+      return p.nome.toLowerCase().includes(q) || p.descricao.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q)
+    }
     return true
   })
 

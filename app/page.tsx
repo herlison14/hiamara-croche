@@ -84,7 +84,7 @@ export default function Home() {
               },
             ].map((benefit, index) => (
               <StaggerItem key={index}>
-                <div className="text-center p-8 rounded-xl bg-white/50 border border-creme-200 hover:border-rosa-300 transition-colors">
+                <div className="text-center p-8 rounded-xl bg-creme-100/50 border border-creme-200 hover:border-rosa-300 transition-colors">
                   <div className="text-5xl mb-4">{benefit.icon}</div>
                   <h3 className="text-2xl font-semibold text-texto-escuro mb-3">
                     {benefit.title}

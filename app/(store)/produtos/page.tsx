@@ -98,7 +98,7 @@ export default async function ProdutosPage({ searchParams }: Props) {
             </div>
           }
         >
-          <TabsFiltro categoria={categoria} />
+          <TabsFiltro categoria={categoria} busca={busca} />
         </Suspense>
       </div>
     </div>
