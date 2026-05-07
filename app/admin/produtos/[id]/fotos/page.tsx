@@ -95,14 +95,14 @@ export default function AdminProdutoFotosPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div className="flex items-center gap-4">
-        <Link href="/admin/produtos" className="text-[#8A7B7B] hover:text-[#C97A84]">
+        <Link href="/admin/produtos" className="text-texto-claro hover:text-rosa-400 transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
-          <h1 className="text-3xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>
+          <h1 className="font-display text-3xl font-light text-texto-escuro">
             Fotos: {produto?.nome ?? '...'}
           </h1>
-          <p className="text-sm text-[#8A7B7B]">{fotos.length} foto{fotos.length !== 1 ? 's' : ''} adicionada{fotos.length !== 1 ? 's' : ''}</p>
+          <p className="text-sm text-texto-claro">{fotos.length} foto{fotos.length !== 1 ? 's' : ''} adicionada{fotos.length !== 1 ? 's' : ''}</p>
         </div>
       </div>
 
@@ -111,11 +111,11 @@ export default function AdminProdutoFotosPage() {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
         onClick={() => inputRef.current?.click()}
-        className="border-2 border-dashed border-[#EDE0CD] hover:border-[#C97A84] rounded-2xl p-10 text-center cursor-pointer transition-colors group"
+        className="border-2 border-dashed border-creme-200 hover:border-rosa-400 rounded-2xl p-10 text-center cursor-pointer transition-colors group"
       >
-        <Upload size={32} className="mx-auto text-[#C97A84] mb-3" />
-        <p className="text-[#5C4A4A] font-medium">Arraste fotos aqui ou clique para selecionar</p>
-        <p className="text-xs text-[#8A7B7B] mt-1">JPG, PNG, WEBP — máx. 10MB por arquivo</p>
+        <Upload size={32} className="mx-auto text-rosa-400 mb-3" />
+        <p className="text-texto-medio font-medium">Arraste fotos aqui ou clique para selecionar</p>
+        <p className="text-xs text-texto-claro mt-1">JPG, PNG, WEBP — máx. 10MB por arquivo</p>
         <input ref={inputRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
       </div>
 
@@ -124,7 +124,7 @@ export default function AdminProdutoFotosPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-4 gap-3">
             {previews.map((file, i) => (
-              <div key={i} className="relative aspect-[4/5] rounded-xl overflow-hidden bg-[#F5EFE6]">
+              <div key={i} className="relative aspect-[4/5] rounded-xl overflow-hidden bg-creme-100">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" />
                 <button onClick={() => removerPreview(i)}
@@ -132,8 +132,8 @@ export default function AdminProdutoFotosPage() {
                   ×
                 </button>
                 {progresso[file.name] !== undefined && (
-                  <div className="absolute bottom-0 inset-x-0 h-1 bg-white/50">
-                    <div className="h-full bg-[#C97A84] transition-all" style={{ width: `${progresso[file.name]}%` }} />
+                  <div className="absolute bottom-0 inset-x-0 h-1 bg-creme-50/50">
+                    <div className="h-full bg-rosa-400 transition-all" style={{ width: `${progresso[file.name]}%` }} />
                   </div>
                 )}
               </div>
@@ -142,7 +142,7 @@ export default function AdminProdutoFotosPage() {
           <button
             onClick={uploadFotos}
             disabled={uploading}
-            className="flex items-center gap-2 px-6 py-3 bg-[#C97A84] hover:bg-[#A85A65] disabled:opacity-60 text-white text-sm font-medium rounded-lg transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-rosa-400 hover:bg-rosa-500 disabled:opacity-60 text-white text-sm font-medium rounded-lg transition-colors"
           >
             <Upload size={16} />
             {uploading ? 'Enviando...' : `Enviar ${previews.length} foto${previews.length > 1 ? 's' : ''}`}
@@ -153,18 +153,18 @@ export default function AdminProdutoFotosPage() {
       {/* Fotos existentes */}
       {fotos.length > 0 && (
         <div>
-          <h2 className="text-lg font-light text-[#3D2B2B] mb-4" style={{ fontFamily: 'Cormorant Garamond' }}>
+          <h2 className="font-display text-lg font-light text-texto-escuro mb-4">
             Fotos do Produto
           </h2>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
             {fotos.map((foto) => {
               const isPrincipal = foto.url === produto?.imagem_principal
               return (
-                <div key={foto.id} className="relative aspect-[4/5] rounded-xl overflow-hidden bg-[#F5EFE6] group">
+                <div key={foto.id} className="relative aspect-[4/5] rounded-xl overflow-hidden bg-creme-100 group">
                   <Image src={foto.url} alt={foto.alt ?? 'foto'} fill className="object-cover" sizes="150px" />
 
                   {isPrincipal && (
-                    <div className="absolute top-1.5 left-1.5 px-2 py-0.5 bg-[#C97A84] text-white text-[9px] rounded-full font-medium">
+                    <div className="absolute top-1.5 left-1.5 px-2 py-0.5 bg-rosa-400 text-white text-[9px] rounded-full font-medium">
                       Principal
                     </div>
                   )}

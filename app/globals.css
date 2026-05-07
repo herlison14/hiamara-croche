@@ -16,6 +16,28 @@
   --texto-claro: #8A7B7B;
   --texto-medio: #5C4A4A;
   --texto-escuro: #3D2B2B;
+
+  /* shadcn/ui — mapeado na paleta creme/rosa */
+  --background: 43 67% 97%;
+  --foreground: 0 17% 20%;
+  --card: 43 67% 97%;
+  --card-foreground: 0 17% 20%;
+  --popover: 43 67% 97%;
+  --popover-foreground: 0 17% 20%;
+  --primary: 353 42% 63%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 35 43% 93%;
+  --secondary-foreground: 0 11% 33%;
+  --muted: 35 43% 93%;
+  --muted-foreground: 0 6% 51%;
+  --accent: 35 38% 87%;
+  --accent-foreground: 0 17% 20%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 35 38% 87%;
+  --input: 35 38% 87%;
+  --ring: 353 42% 63%;
+  --radius: 0.5rem;
 }
 
 @layer base {

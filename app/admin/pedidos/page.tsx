@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MessageCircle, ChevronDown } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { Pedido, StatusPedido } from '@/lib/types'
 
@@ -22,8 +22,6 @@ const STATUS_CORES: Record<string, string> = {
   entregue: 'bg-emerald-100 text-emerald-700',
   cancelado: 'bg-red-100 text-red-700',
 }
-
-const TODOS_STATUS = ['', ...Object.keys(STATUS_LABELS)]
 
 export default function AdminPedidosPage() {
   const [pedidos, setPedidos] = useState<Pedido[]>([])
@@ -73,47 +71,47 @@ export default function AdminPedidosPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Pedidos</h1>
+      <h1 className="font-display text-3xl font-light text-texto-escuro">Pedidos</h1>
 
       <div className="flex flex-col sm:flex-row gap-3">
         <input value={busca} onChange={(e) => setBusca(e.target.value)}
           placeholder="Buscar por número, nome ou e-mail..."
-          className="flex-1 px-4 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84] bg-white" />
+          className="flex-1 px-4 py-2.5 border border-creme-200 rounded-lg text-sm text-texto-medio focus:outline-none focus:border-rosa-300 bg-creme-50" />
         <select value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)}
-          className="px-4 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] bg-white focus:outline-none focus:border-[#C97A84]">
+          className="px-4 py-2.5 border border-creme-200 rounded-lg text-sm text-texto-medio bg-creme-50 focus:outline-none focus:border-rosa-300">
           <option value="">Todos os status</option>
           {Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
         </select>
       </div>
 
-      <div className="bg-white border border-[#EDE0CD] rounded-2xl overflow-hidden">
+      <div className="bg-creme-50 border border-creme-200 rounded-2xl overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-[#8A7B7B]">Carregando...</div>
+          <div className="p-8 text-center text-texto-claro">Carregando...</div>
         ) : exibidos.length === 0 ? (
-          <div className="p-8 text-center text-[#8A7B7B]">Nenhum pedido encontrado</div>
+          <div className="p-8 text-center text-texto-claro">Nenhum pedido encontrado</div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-[#F5EFE6] border-b border-[#EDE0CD]">
+            <thead className="bg-creme-100 border-b border-creme-200">
               <tr>
                 {['Número', 'Cliente', 'Data', 'Total', 'Pagamento', 'Status', 'Ações'].map((h) => (
-                  <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-[#8A7B7B]">{h}</th>
+                  <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-texto-claro">{h}</th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F5EFE6]">
+            <tbody className="divide-y divide-creme-100">
               {exibidos.map((p) => (
-                <tr key={p.id} onClick={() => setSelecionado(p)} className="cursor-pointer hover:bg-[#FDFAF5] transition-colors">
-                  <td className="px-4 py-3 font-medium text-[#3D2B2B]">{p.numero}</td>
-                  <td className="px-4 py-3 text-[#5C4A4A]">{p.cliente_nome}</td>
-                  <td className="px-4 py-3 text-[#8A7B7B] text-xs">{new Date(p.criado_em).toLocaleDateString('pt-BR')}</td>
-                  <td className="px-4 py-3 font-medium text-[#A85A65]">R$ {Number(p.total).toFixed(2).replace('.', ',')}</td>
+                <tr key={p.id} onClick={() => setSelecionado(p)} className="cursor-pointer hover:bg-creme-100/50 transition-colors">
+                  <td className="px-4 py-3 font-medium text-texto-escuro">{p.numero}</td>
+                  <td className="px-4 py-3 text-texto-medio">{p.cliente_nome}</td>
+                  <td className="px-4 py-3 text-texto-claro text-xs">{new Date(p.criado_em).toLocaleDateString('pt-BR')}</td>
+                  <td className="px-4 py-3 font-medium text-rosa-500">R$ {Number(p.total).toFixed(2).replace('.', ',')}</td>
                   <td className="px-4 py-3">
                     <span className={cn('text-[10px] px-2 py-0.5 rounded-full font-medium', p.pagamento_status === 'aprovado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700')}>
                       {p.pagamento_status === 'aprovado' ? 'Aprovado' : 'Pendente'}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={cn('text-[10px] px-2 py-0.5 rounded-full font-medium', STATUS_CORES[p.status] ?? 'bg-gray-100 text-gray-600')}>
+                    <span className={cn('text-[10px] px-2 py-0.5 rounded-full font-medium', STATUS_CORES[p.status] ?? 'bg-creme-200 text-texto-claro')}>
                       {STATUS_LABELS[p.status] ?? p.status}
                     </span>
                   </td>
@@ -131,44 +129,41 @@ export default function AdminPedidosPage() {
         )}
       </div>
 
-      {/* Drawer de detalhe */}
       {selecionado && (
         <div className="fixed inset-0 z-50 flex" onClick={() => setSelecionado(null)}>
           <div className="flex-1 bg-black/30" />
-          <div className="w-full max-w-md bg-white h-full overflow-y-auto shadow-2xl p-6 space-y-6" onClick={(e) => e.stopPropagation()}>
+          <div className="w-full max-w-md bg-creme-50 h-full overflow-y-auto shadow-2xl p-6 space-y-6" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start justify-between">
               <div>
-                <h2 className="text-2xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>
-                  {selecionado.numero}
-                </h2>
-                <p className="text-xs text-[#8A7B7B]">{new Date(selecionado.criado_em).toLocaleString('pt-BR')}</p>
+                <h2 className="font-display text-2xl font-light text-texto-escuro">{selecionado.numero}</h2>
+                <p className="text-xs text-texto-claro">{new Date(selecionado.criado_em).toLocaleString('pt-BR')}</p>
               </div>
-              <button onClick={() => setSelecionado(null)} className="text-[#8A7B7B] hover:text-[#3D2B2B] text-xl">×</button>
+              <button onClick={() => setSelecionado(null)} className="text-texto-claro hover:text-texto-escuro text-xl">×</button>
             </div>
 
             <div className="space-y-2 text-sm">
-              <p className="font-medium text-[#3D2B2B]">{selecionado.cliente_nome}</p>
-              <p className="text-[#8A7B7B]">{selecionado.cliente_email}</p>
-              {selecionado.cliente_telefone && <p className="text-[#8A7B7B]">{selecionado.cliente_telefone}</p>}
+              <p className="font-medium text-texto-escuro">{selecionado.cliente_nome}</p>
+              <p className="text-texto-claro">{selecionado.cliente_email}</p>
+              {selecionado.cliente_telefone && <p className="text-texto-claro">{selecionado.cliente_telefone}</p>}
               {selecionado.endereco_cidade && (
-                <p className="text-[#8A7B7B]">{selecionado.endereco_rua}, {selecionado.endereco_numero} — {selecionado.endereco_cidade}/{selecionado.endereco_estado}</p>
+                <p className="text-texto-claro">{selecionado.endereco_rua}, {selecionado.endereco_numero} — {selecionado.endereco_cidade}/{selecionado.endereco_estado}</p>
               )}
             </div>
 
             <div>
-              <label className="text-xs font-medium uppercase tracking-widest text-[#8A7B7B]">Alterar Status</label>
+              <label className="text-xs font-medium uppercase tracking-widest text-texto-claro">Alterar Status</label>
               <select
                 value={selecionado.status}
                 onChange={(e) => atualizarStatus(selecionado.id, e.target.value as StatusPedido)}
-                className="w-full mt-1 px-4 py-2.5 border border-[#EDE0CD] rounded-lg text-sm text-[#5C4A4A] focus:outline-none focus:border-[#C97A84]"
+                className="w-full mt-1 px-4 py-2.5 border border-creme-200 rounded-lg text-sm text-texto-medio focus:outline-none focus:border-rosa-300 bg-creme-50"
               >
                 {Object.entries(STATUS_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
               </select>
             </div>
 
             <div className="text-sm">
-              <p className="text-[#8A7B7B] mb-1">Total: <span className="font-semibold text-[#A85A65]">R$ {Number(selecionado.total).toFixed(2).replace('.', ',')}</span></p>
-              <p className="text-[#8A7B7B]">Pagamento: <span className={selecionado.pagamento_status === 'aprovado' ? 'text-green-600' : 'text-yellow-600'}>{selecionado.pagamento_status}</span></p>
+              <p className="text-texto-claro mb-1">Total: <span className="font-semibold text-rosa-500">R$ {Number(selecionado.total).toFixed(2).replace('.', ',')}</span></p>
+              <p className="text-texto-claro">Pagamento: <span className={selecionado.pagamento_status === 'aprovado' ? 'text-green-600' : 'text-yellow-600'}>{selecionado.pagamento_status}</span></p>
             </div>
 
             {selecionado.cliente_telefone && (

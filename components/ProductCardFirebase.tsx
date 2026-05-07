@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Produto } from '@/lib/firebase-helpers'
+import type { Produto } from '@/lib/produtos-actions'
 
 interface ProductCardProps {
   produto: Produto
@@ -14,7 +14,7 @@ export function ProductCardFirebase({ produto }: ProductCardProps) {
   return (
     <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.2 }}>
       <Link href={`/produto/${produto.slug}`}>
-        <div className="group relative flex flex-col bg-white border border-creme-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <div className="group relative flex flex-col bg-creme-50 border border-creme-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
           {/* Imagem do Produto */}
           <div className="relative overflow-hidden bg-creme-100 aspect-[4/5]">
             {primeiraImagem ? (
@@ -26,10 +26,7 @@ export function ProductCardFirebase({ produto }: ProductCardProps) {
               />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-creme-100 to-rosa-100 flex items-center justify-center">
-                <span
-                  className="text-6xl font-light text-rosa-300"
-                  style={{ fontFamily: 'Cormorant Garamond' }}
-                >
+                <span className="font-display text-6xl font-light text-rosa-300">
                   {produto.nome[0]?.toUpperCase() || '🧶'}
                 </span>
               </div>
@@ -70,19 +67,13 @@ export function ProductCardFirebase({ produto }: ProductCardProps) {
             </span>
 
             {/* Nome */}
-            <h3
-              className="font-light text-texto-escuro leading-tight line-clamp-2"
-              style={{ fontFamily: 'Cormorant Garamond', fontSize: '18px' }}
-            >
+            <h3 className="font-display text-lg font-light text-texto-escuro leading-tight line-clamp-2">
               {produto.nome}
             </h3>
 
             {/* Preço */}
             <div className="mt-auto pt-2">
-              <p
-                className="text-xl font-light text-rosa-500"
-                style={{ fontFamily: 'Cormorant Garamond' }}
-              >
+              <p className="font-display text-xl font-light text-rosa-500">
                 R$ {produto.preco.toFixed(2).replace('.', ',')}
               </p>
             </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/cn'
+import { Label } from '@/components/ui/label'
 import type { Variante } from '@/lib/types'
 
 interface VariantSelectorProps {
@@ -16,9 +17,12 @@ export function VariantSelector({ variantes, selecionado, onChange }: VariantSel
     <div className="space-y-4">
       {variantes.map((v) => (
         <div key={v.nome}>
-          <p className="text-xs font-medium uppercase tracking-widest text-[#8A7B7B] mb-2">
-            {v.nome}: <span className="text-[#5C4A4A] normal-case tracking-normal">{selecionado[v.nome] ?? ''}</span>
-          </p>
+          <Label className="mb-2 inline-block">
+            {v.nome}:{' '}
+            <span className="text-secondary-foreground normal-case tracking-normal font-normal">
+              {selecionado[v.nome] ?? ''}
+            </span>
+          </Label>
           <div className="flex flex-wrap gap-2">
             {v.opcoes.map((opcao) => (
               <button
@@ -27,8 +31,8 @@ export function VariantSelector({ variantes, selecionado, onChange }: VariantSel
                 className={cn(
                   'px-4 py-2 text-sm rounded-md border transition-all duration-200',
                   selecionado[v.nome] === opcao
-                    ? 'bg-[#C97A84] border-[#C97A84] text-white font-medium'
-                    : 'border-[#EDE0CD] text-[#5C4A4A] hover:border-[#C97A84] hover:text-[#C97A84]'
+                    ? 'bg-primary border-primary text-primary-foreground font-medium'
+                    : 'border-border text-secondary-foreground hover:border-primary hover:text-primary'
                 )}
               >
                 {opcao}

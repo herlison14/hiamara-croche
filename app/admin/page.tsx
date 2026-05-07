@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { LayoutDashboard, ShoppingBag, Package, Clock } from 'lucide-react'
 import { StatsCard } from '@/components/admin/StatsCard'
@@ -57,8 +56,8 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Dashboard</h1>
-        <p className="text-sm text-[#8A7B7B] mt-1">Bem-vinda de volta!</p>
+        <h1 className="font-display text-3xl font-light text-texto-escuro">Dashboard</h1>
+        <p className="text-sm text-texto-claro mt-1">Bem-vinda de volta!</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -74,23 +73,22 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Últimos pedidos */}
-        <div className="bg-white border border-[#EDE0CD] rounded-2xl p-6">
+        <div className="bg-creme-50 border border-creme-200 rounded-2xl p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-light text-[#3D2B2B]" style={{ fontFamily: 'Cormorant Garamond' }}>Últimos Pedidos</h2>
-            <Link href="/admin/pedidos" className="text-xs text-[#C97A84] hover:underline">Ver todos</Link>
+            <h2 className="font-display text-xl font-light text-texto-escuro">Últimos Pedidos</h2>
+            <Link href="/admin/pedidos" className="text-xs text-rosa-400 hover:underline">Ver todos</Link>
           </div>
           <div className="space-y-3">
-            {stats.ultimos.length === 0 && <p className="text-sm text-[#8A7B7B]">Nenhum pedido ainda</p>}
+            {stats.ultimos.length === 0 && <p className="text-sm text-texto-claro">Nenhum pedido ainda</p>}
             {stats.ultimos.map((p: { numero: string; cliente_nome: string; total: number; status: string; criado_em: string }) => (
-              <div key={p.numero} className="flex items-center justify-between py-2 border-b border-[#F5EFE6] last:border-0">
+              <div key={p.numero} className="flex items-center justify-between py-2 border-b border-creme-100 last:border-0">
                 <div>
-                  <p className="text-sm font-medium text-[#3D2B2B]">{p.numero}</p>
-                  <p className="text-xs text-[#8A7B7B]">{p.cliente_nome}</p>
+                  <p className="text-sm font-medium text-texto-escuro">{p.numero}</p>
+                  <p className="text-xs text-texto-claro">{p.cliente_nome}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-[#A85A65]">R$ {Number(p.total).toFixed(2).replace('.', ',')}</p>
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${STATUS_CORES[p.status] ?? 'bg-gray-100 text-gray-600'}`}>
+                  <p className="text-sm font-medium text-rosa-500">R$ {Number(p.total).toFixed(2).replace('.', ',')}</p>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${STATUS_CORES[p.status] ?? 'bg-creme-100 text-texto-claro'}`}>
                     {STATUS_LABELS[p.status] ?? p.status}
                   </span>
                 </div>
@@ -99,9 +97,8 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Pedidos por status */}
-        <div className="bg-white border border-[#EDE0CD] rounded-2xl p-6">
-          <h2 className="text-xl font-light text-[#3D2B2B] mb-4" style={{ fontFamily: 'Cormorant Garamond' }}>Por Status</h2>
+        <div className="bg-creme-50 border border-creme-200 rounded-2xl p-6">
+          <h2 className="font-display text-xl font-light text-texto-escuro mb-4">Por Status</h2>
           <div className="space-y-3">
             {Object.entries(STATUS_LABELS).map(([key, label]) => {
               const count = stats.porStatus[key] ?? 0
@@ -110,11 +107,11 @@ export default async function AdminDashboard() {
               return (
                 <div key={key}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-[#5C4A4A]">{label}</span>
-                    <span className="font-medium text-[#3D2B2B]">{count}</span>
+                    <span className="text-texto-medio">{label}</span>
+                    <span className="font-medium text-texto-escuro">{count}</span>
                   </div>
-                  <div className="h-1.5 bg-[#F5EFE6] rounded-full">
-                    <div className="h-1.5 bg-[#C97A84] rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+                  <div className="h-1.5 bg-creme-200 rounded-full">
+                    <div className="h-1.5 bg-rosa-400 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
                   </div>
                 </div>
               )
@@ -124,10 +121,10 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="flex gap-4">
-        <Link href="/admin/produtos" className="px-6 py-3 bg-[#C97A84] hover:bg-[#A85A65] text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
+        <Link href="/admin/produtos" className="px-6 py-3 bg-rosa-400 hover:bg-rosa-500 text-white text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
           + Novo Produto
         </Link>
-        <Link href="/admin/pedidos" className="px-6 py-3 border border-[#EDE0CD] text-[#5C4A4A] hover:border-[#C97A84] text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
+        <Link href="/admin/pedidos" className="px-6 py-3 border border-creme-200 text-texto-medio hover:border-rosa-400 text-sm font-medium uppercase tracking-widest rounded-md transition-all duration-300">
           Ver Pedidos
         </Link>
       </div>

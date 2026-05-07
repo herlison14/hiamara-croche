@@ -52,9 +52,8 @@ export function CinematicHero() {
 
           {/* Título principal com sombra cinematográfica */}
           <motion.h1
-            className="text-7xl md:text-9xl font-light text-white mb-4 tracking-tight"
+            className="font-display text-7xl md:text-9xl font-light text-white mb-4 tracking-tight"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
               textShadow: '0 10px 30px rgba(0,0,0,0.4)',
               letterSpacing: '-0.02em'
             }}
@@ -66,9 +65,8 @@ export function CinematicHero() {
           </motion.h1>
 
           <motion.h2
-            className="text-5xl md:text-7xl font-light text-rosa-200 mb-8"
+            className="font-display text-5xl md:text-7xl font-light text-rosa-200 mb-8"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
               textShadow: '0 8px 25px rgba(0,0,0,0.35)',
             }}
             initial={{ opacity: 0, scale: 0.85, y: 60 }}
@@ -80,9 +78,8 @@ export function CinematicHero() {
 
           {/* Slogan elegante */}
           <motion.p
-            className="text-lg md:text-2xl text-white/90 font-light mb-12 max-w-2xl mx-auto"
+            className="font-display text-lg md:text-2xl text-white/90 font-light mb-12 max-w-2xl mx-auto"
             style={{
-              fontFamily: "'Lora', serif",
               textShadow: '0 4px 15px rgba(0,0,0,0.3)',
               lineHeight: 1.6
             }}

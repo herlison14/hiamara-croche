@@ -1,9 +1,36 @@
 import Link from 'next/link'
-import { fetchProdutoosAction } from '@/lib/produtos-actions'
+import { fetchProdutoosAction, type Produto as FirebaseProduto } from '@/lib/produtos-actions'
 import { notFound } from 'next/navigation'
+import { AddToCartButton } from '@/components/store/AddToCartButton'
+import { ProductGallery } from '@/components/store/ProductGallery'
+import type { Produto } from '@/lib/types'
 
 interface Props {
   params: Promise<{ slug: string }>
+}
+
+function toStoreProduto(p: FirebaseProduto): Produto {
+  return {
+    id: p.id,
+    nome: p.nome,
+    slug: p.slug,
+    descricao: p.descricao || null,
+    preco: p.preco,
+    preco_promocional: null,
+    categoria_id: null,
+    imagens: p.fotos?.map((f) => f.url) ?? [],
+    imagem_principal: p.fotos?.[0]?.url ?? null,
+    estoque: 1,
+    ativo: p.ativo,
+    destaque: p.destaque ?? false,
+    mais_vendido: p.mais_vendido ?? false,
+    variantes: [],
+    tags: [],
+    peso_gramas: null,
+    tempo_producao_dias: 7,
+    criado_em: p.criado_em ?? new Date().toISOString(),
+    atualizado_em: p.criado_em ?? new Date().toISOString(),
+  }
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -30,6 +57,8 @@ export default async function ProdutoPage({ params }: Props) {
     notFound()
   }
 
+  const storeProduto = toStoreProduto(produto)
+
   return (
     <div className="min-h-screen bg-creme-50">
       <div className="max-w-6xl mx-auto px-6 py-4">
@@ -44,16 +73,11 @@ export default async function ProdutoPage({ params }: Props) {
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-4">
-            {produto.fotos?.[0] && (
-              <div className="aspect-square rounded-2xl overflow-hidden bg-creme-100">
-                <img
-                  src={produto.fotos[0].url}
-                  alt={produto.fotos[0].alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
+          <div>
+            {produto.fotos && produto.fotos.length > 0
+              ? <ProductGallery fotos={produto.fotos} />
+              : <div className="aspect-square rounded-2xl bg-creme-100 flex items-center justify-center"><span className="font-display text-8xl font-light text-rosa-200">{produto.nome[0]}</span></div>
+            }
           </div>
 
           <div className="space-y-6">
@@ -64,19 +88,13 @@ export default async function ProdutoPage({ params }: Props) {
             </div>
 
             <div>
-              <h1
-                className="text-4xl md:text-5xl font-light text-texto-escuro leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
+              <h1 className="font-display text-4xl md:text-5xl font-light text-texto-escuro leading-tight">
                 {produto.nome}
               </h1>
             </div>
 
             <div className="border-t border-b border-creme-200 py-6">
-              <p
-                className="text-4xl font-light text-rosa-500"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
+              <p className="font-display text-4xl font-light text-rosa-500">
                 R$ {produto.preco.toFixed(2).replace('.', ',')}
               </p>
             </div>
@@ -89,9 +107,7 @@ export default async function ProdutoPage({ params }: Props) {
             </div>
 
             <div className="space-y-3 pt-4">
-              <button className="w-full py-4 bg-gradient-to-r from-rosa-400 to-rosa-500 hover:from-rosa-500 hover:to-rosa-600 text-white font-semibold uppercase tracking-widest rounded-lg transition-all duration-300">
-                Adicionar ao Carrinho
-              </button>
+              <AddToCartButton produto={storeProduto} size="lg" />
               <Link
                 href="/produtos"
                 className="block w-full py-4 border-2 border-rosa-400 text-rosa-400 hover:bg-rosa-50 font-semibold uppercase tracking-widest rounded-lg transition-all duration-300 text-center"

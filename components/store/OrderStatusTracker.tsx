@@ -21,7 +21,7 @@ export function OrderStatusTracker({ status }: OrderStatusTrackerProps) {
 
   return (
     <div className="relative">
-      <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-[#EDE0CD]" />
+      <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-creme-200" />
       <div className="space-y-6">
         {etapas.map((etapa, i) => {
           const done = i < currentIndex
@@ -33,19 +33,19 @@ export function OrderStatusTracker({ status }: OrderStatusTrackerProps) {
               <div
                 className={cn(
                   'relative z-10 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300',
-                  done && 'bg-green-500 text-white',
-                  active && 'bg-[#C97A84] text-white animate-pulse',
-                  future && 'bg-[#F5EFE6] text-[#8A7B7B] border border-[#EDE0CD]'
+                  done && 'bg-rosa-300 text-white',
+                  active && 'bg-rosa-400 text-white animate-pulse',
+                  future && 'bg-creme-100 text-texto-claro border border-creme-200'
                 )}
               >
                 {etapa.icon}
               </div>
               <div className="pt-1.5">
-                <p className={cn('font-medium text-sm', future ? 'text-[#8A7B7B]' : 'text-[#3D2B2B]')}>
+                <p className={cn('font-medium text-sm', future ? 'text-texto-claro' : 'text-texto-escuro')}>
                   {etapa.label}
                 </p>
                 {(done || active) && (
-                  <p className="text-xs text-[#8A7B7B] mt-0.5">{etapa.desc}</p>
+                  <p className="text-xs text-texto-claro mt-0.5">{etapa.desc}</p>
                 )}
               </div>
             </div>
