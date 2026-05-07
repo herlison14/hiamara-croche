@@ -23,18 +23,19 @@ function CrochetNeedleIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
+      className="text-rosa-400"
     >
       <path
         d="M3 17L10 10M10 10L14 6C15 5 16.5 5 17 6C17.5 7 17 8.5 16 9L12 13"
-        stroke="#C97A84"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="10" cy="10" r="1.5" fill="#C97A84" />
+      <circle cx="10" cy="10" r="1.5" fill="currentColor" />
       <path
         d="M16 4L17 3"
-        stroke="#C97A84"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
       />

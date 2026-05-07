@@ -93,7 +93,7 @@ export function CinematicProductCard({
         <Link href={`/produto/${slug}`}>
           <motion.div
             className="w-full bg-rosa-400 hover:bg-rosa-500 text-white py-3 rounded-lg font-semibold uppercase tracking-wide text-sm text-center transition-colors cursor-pointer"
-            whileHover={{ backgroundColor: '#A85A65' }}
+            whileHover={{ filter: 'brightness(0.88)' }}
             whileTap={{ scale: 0.98 }}
           >
             Ver Detalhes
