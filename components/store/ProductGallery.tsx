@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface Foto {
   url: string
@@ -15,11 +16,14 @@ export function ProductGallery({ fotos }: { fotos: Foto[] }) {
 
   return (
     <div className="space-y-3">
-      <div className="aspect-square rounded-2xl overflow-hidden bg-creme-100">
-        <img
+      <div className="relative aspect-square rounded-2xl overflow-hidden bg-creme-100">
+        <Image
           src={current.url}
           alt={current.alt}
-          className="w-full h-full object-cover transition-opacity duration-300"
+          fill
+          className="object-cover transition-opacity duration-300"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
         />
       </div>
       {fotos.length > 1 && (
@@ -28,11 +32,17 @@ export function ProductGallery({ fotos }: { fotos: Foto[] }) {
             <button
               key={i}
               onClick={() => setIdx(i)}
-              className={`aspect-square rounded-lg overflow-hidden bg-creme-100 border-2 transition-colors ${
+              className={`relative aspect-square rounded-lg overflow-hidden bg-creme-100 border-2 transition-colors ${
                 i === idx ? 'border-rosa-400' : 'border-transparent hover:border-creme-300'
               }`}
             >
-              <img src={foto.url} alt={foto.alt} className="w-full h-full object-cover" />
+              <Image
+                src={foto.url}
+                alt={foto.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 25vw, 12vw"
+              />
             </button>
           ))}
         </div>

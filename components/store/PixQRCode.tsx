@@ -74,6 +74,8 @@ export function PixQRCode({ qrCodeBase64, copiaCola, valor, expiracao, numeroPed
         <img
           src={`data:image/png;base64,${qrCodeBase64}`}
           alt="QR Code PIX"
+          width={192}
+          height={192}
           className="w-48 h-48 border-4 border-creme-100 rounded-xl"
         />
       </div>

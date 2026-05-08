@@ -4,6 +4,12 @@ import { CinematicSection } from '@/components/cinematicSection'
 import { CinematicTransition, StaggerContainer, StaggerItem } from '@/components/cinematicTransition'
 import { ProdutosColecao } from '@/components/produtosColecao'
 
+const BENEFITS = [
+  { icon: '✋', title: 'Feito à Mão', description: 'Cada peça é crafted com dedicação e cuidado artesanal' },
+  { icon: '💚', title: 'Entregue com Amor', description: 'Enviamos com todo carinho, protegendo sua preciosidade' },
+  { icon: '♻️', title: 'Sustentável', description: 'Usando fios de qualidade e práticas eco-friendly' },
+]
+
 export default function Home() {
   return (
     <main className="bg-creme-50">
@@ -66,23 +72,7 @@ export default function Home() {
       >
         <StaggerContainer staggerDelay={0.15}>
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '✋',
-                title: 'Feito à Mão',
-                description: 'Cada peça é crafted com dedicação e cuidado artesanal',
-              },
-              {
-                icon: '💚',
-                title: 'Entregue com Amor',
-                description: 'Enviamos com todo carinho, protegendo sua preciosidade',
-              },
-              {
-                icon: '♻️',
-                title: 'Sustentável',
-                description: 'Usando fios de qualidade e práticas eco-friendly',
-              },
-            ].map((benefit, index) => (
+            {BENEFITS.map((benefit, index) => (
               <StaggerItem key={index}>
                 <div className="text-center p-8 rounded-xl bg-creme-100/50 border border-creme-200 hover:border-rosa-300 transition-colors">
                   <div className="text-5xl mb-4">{benefit.icon}</div>

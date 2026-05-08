@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,7 +14,7 @@ interface CinematicProductCardProps {
   index: number
 }
 
-export function CinematicProductCard({
+export const CinematicProductCard = memo(function CinematicProductCard({
   slug,
   name,
   image,
@@ -110,4 +111,4 @@ export function CinematicProductCard({
       />
     </motion.div>
   )
-}
+})

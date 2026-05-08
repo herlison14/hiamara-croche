@@ -1,6 +1,8 @@
 'use client'
 
+import { memo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import type { Produto } from '@/lib/produtos-actions'
 
@@ -8,7 +10,7 @@ interface ProductCardProps {
   produto: Produto
 }
 
-export function ProductCardFirebase({ produto }: ProductCardProps) {
+export const ProductCardFirebase = memo(function ProductCardFirebase({ produto }: ProductCardProps) {
   const primeiraImagem = produto.fotos?.[0]?.url
 
   return (
@@ -18,11 +20,12 @@ export function ProductCardFirebase({ produto }: ProductCardProps) {
           {/* Imagem do Produto */}
           <div className="relative overflow-hidden bg-creme-100 aspect-[4/5]">
             {primeiraImagem ? (
-              <img
+              <Image
                 src={primeiraImagem}
                 alt={produto.nome}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-creme-100 to-rosa-100 flex items-center justify-center">
@@ -87,4 +90,4 @@ export function ProductCardFirebase({ produto }: ProductCardProps) {
       </Link>
     </motion.div>
   )
-}
+})

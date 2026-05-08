@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ProductCardFirebase } from '@/components/ProductCardFirebase'
 import { fetchProdutoosAction, type Produto } from '@/lib/produtos-actions'
@@ -42,23 +42,30 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
     fetchProdutos()
   }, [categoria])
 
-  const counts: Record<AbaId, number> = {
-    todos: produtos.length,
-    destaque: produtos.filter((p) => p.destaque).length,
-    novo: produtos.filter((p) => p.novo).length,
-    mais_vendido: produtos.filter((p) => p.mais_vendido).length,
-  }
-
-  const produtosFiltrados = produtos.filter((p) => {
-    if (abaAtiva === 'destaque' && !p.destaque) return false
-    if (abaAtiva === 'novo' && !p.novo) return false
-    if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
-    if (busca) {
-      const q = busca.toLowerCase()
-      return p.nome.toLowerCase().includes(q) || p.descricao.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q)
+  const { counts, produtosFiltrados } = useMemo(() => {
+    const buscaLower = busca?.toLowerCase() ?? ''
+    const filtrados = produtos.filter((p) => {
+      if (abaAtiva === 'destaque' && !p.destaque) return false
+      if (abaAtiva === 'novo' && !p.novo) return false
+      if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
+      if (buscaLower)
+        return (
+          p.nome.toLowerCase().includes(buscaLower) ||
+          p.descricao.toLowerCase().includes(buscaLower) ||
+          p.categoria.toLowerCase().includes(buscaLower)
+        )
+      return true
+    })
+    return {
+      produtosFiltrados: filtrados,
+      counts: {
+        todos: produtos.length,
+        destaque: produtos.filter((p) => p.destaque).length,
+        novo: produtos.filter((p) => p.novo).length,
+        mais_vendido: produtos.filter((p) => p.mais_vendido).length,
+      } as Record<AbaId, number>,
     }
-    return true
-  })
+  }, [produtos, abaAtiva, busca])
 
   const skeletons = Array.from({ length: 8 })
 

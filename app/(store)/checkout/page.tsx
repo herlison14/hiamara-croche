@@ -13,6 +13,12 @@ import { Label } from '@/components/ui/label'
 import toast from 'react-hot-toast'
 import type { DadosCheckout } from '@/lib/types'
 
+const CAMPOS_DADOS = [
+  { name: 'nome', label: 'Nome Completo', type: 'text', required: true },
+  { name: 'email', label: 'E-mail', type: 'email', required: true },
+  { name: 'telefone', label: 'WhatsApp / Telefone', type: 'tel', required: false },
+] as const
+
 const STEPS = [
   { label: 'Dados', sublabel: 'Quem é você?' },
   { label: 'Endereço', sublabel: 'Onde entregar?' },
@@ -162,11 +168,7 @@ export default function CheckoutPage() {
         {step === 1 && (
           <form onSubmit={handleStep1} className="space-y-4 bg-creme-50 border border-creme-200 rounded-2xl p-6">
             <h2 className="font-display text-xl font-light text-texto-escuro">Seus Dados</h2>
-            {[
-              { name: 'nome', label: 'Nome Completo', type: 'text', required: true },
-              { name: 'email', label: 'E-mail', type: 'email', required: true },
-              { name: 'telefone', label: 'WhatsApp / Telefone', type: 'tel', required: false },
-            ].map((f) => (
+            {CAMPOS_DADOS.map((f) => (
               <div key={f.name}>
                 <Label htmlFor={f.name} className="mb-1">{f.label}</Label>
                 <Input

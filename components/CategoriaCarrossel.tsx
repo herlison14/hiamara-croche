@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
@@ -20,11 +20,14 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
   const primeiroProduto = categoria.produtos[0]
   const produtoAtual = categoria.produtos[indexAtual]
 
-  const proximoIndex = (indexAtual + 1) % categoria.produtos.length
-  const indexAnterior = (indexAtual - 1 + categoria.produtos.length) % categoria.produtos.length
-
-  const avancar = () => setIndexAtual(proximoIndex)
-  const voltar = () => setIndexAtual(indexAnterior)
+  const avancar = useCallback(
+    () => setIndexAtual((prev) => (prev + 1) % categoria.produtos.length),
+    [categoria.produtos.length]
+  )
+  const voltar = useCallback(
+    () => setIndexAtual((prev) => (prev - 1 + categoria.produtos.length) % categoria.produtos.length),
+    [categoria.produtos.length]
+  )
 
   const formatarPreco = (preco: number | null) => {
     if (preco === null) return 'SOB CONSULTA'
@@ -50,6 +53,7 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
               alt={primeiroProduto.nome}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
@@ -135,6 +139,7 @@ export function CategoriaCarrossel({ categoria }: CategoriaCarrosselProps) {
                       alt={produtoAtual.nome}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 90vw, 45vw"
                     />
                   </motion.div>
 

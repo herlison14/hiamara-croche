@@ -1,15 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
 import Link from 'next/link'
 
 export function CinematicHero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
   return (
     <motion.section
-      ref={containerRef}
       className="relative w-full h-screen overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -139,39 +135,34 @@ export function CinematicHero() {
       </div>
 
       {/* Indicador de scroll elegante */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity }}
+      <div
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
+        style={{ animation: 'hero-scroll 2.5s ease-in-out infinite' }}
       >
         <div className="text-white/70 text-xs uppercase tracking-widest mb-4">Descubra mais</div>
         <div className="w-6 h-10 border border-white/50 rounded-full flex items-start justify-center p-2">
-          <motion.div
+          <div
             className="w-1 h-2 bg-rosa-300 rounded-full"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
+            style={{ animation: 'hero-scroll-dot 2.5s ease-in-out infinite' }}
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Partículas flutuantes suaves */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <style>{`
+          @keyframes hero-scroll { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(12px); } }
+          @keyframes hero-scroll-dot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+          @keyframes hero-float { 0%, 100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(-30px); opacity: 0.6; } }
+        `}</style>
         {[...Array(5)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
             className="absolute w-1 h-1 bg-white/20 rounded-full"
             style={{
               left: `${20 + i * 15}%`,
               top: `${30 + i * 10}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 4 + i,
-              repeat: Infinity,
-              delay: i * 0.2,
+              animation: `hero-float ${4 + i}s ease-in-out ${i * 0.2}s infinite`,
             }}
           />
         ))}
