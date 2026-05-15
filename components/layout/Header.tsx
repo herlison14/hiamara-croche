@@ -58,8 +58,12 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [scrolled, setScrolled] = useState(false)
+  // mounted: evita hydration mismatch no badge do carrinho — o estado do Zustand
+  // só hidrata do localStorage após mount, então no SSR totalItems=0
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -163,7 +167,7 @@ export default function Header() {
               className="relative flex items-center justify-center w-10 h-10 text-texto-medio hover:text-rosa-500 transition-colors"
             >
               <ShoppingBag size={18} strokeWidth={1.6} />
-              {totalItems > 0 && (
+              {mounted && totalItems > 0 && (
                 <span className="absolute top-1 right-1 flex items-center justify-center min-w-[16px] h-4 px-1 text-[9px] font-semibold bg-rosa-500 text-white rounded-full leading-none">
                   {totalItems > 9 ? '9+' : totalItems}
                 </span>
@@ -243,7 +247,7 @@ export default function Header() {
                 href="/carrinho"
                 className="block py-3.5 text-base font-medium text-texto-medio hover:text-texto-escuro transition-colors border-b border-creme-100"
               >
-                Carrinho{totalItems > 0 && ` (${totalItems})`}
+                Carrinho{mounted && totalItems > 0 && ` (${totalItems})`}
               </Link>
             </li>
             <li className="pt-4">

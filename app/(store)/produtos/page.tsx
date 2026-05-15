@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import Link from 'next/link'
 import { TabsFiltro } from '@/components/TabsFiltro'
 import { fetchProdutoosAction } from '@/lib/produtos-actions'
@@ -15,8 +14,15 @@ interface Props {
 
 export default async function ProdutosPage({ searchParams }: Props) {
   const { categoria, busca } = await searchParams
-  const produtos = await fetchProdutoosAction({})
-  const categorias = [...new Set(produtos.map((p) => p.categoria).filter(Boolean))].sort()
+
+  // Pre-fetch no servidor — render instantâneo (sem skeleton em cold start)
+  const [todosProdutos, produtosFiltrados] = await Promise.all([
+    fetchProdutoosAction({}),
+    categoria ? fetchProdutoosAction({ categoria }) : Promise.resolve(null),
+  ])
+
+  const produtosVisiveis = produtosFiltrados ?? todosProdutos
+  const categorias = [...new Set(todosProdutos.map((p) => p.categoria).filter(Boolean))].sort()
 
   return (
     <div className="min-h-screen bg-creme-50">
@@ -27,8 +33,16 @@ export default async function ProdutosPage({ searchParams }: Props) {
           <div className="max-w-3xl">
             <p className="eyebrow mb-4">Catálogo</p>
             <h1 className="display-xl">
-              Todas as nossas{' '}
-              <span className="italic text-rosa-500">peças</span>.
+              {categoria ? (
+                <>
+                  Coleção <span className="italic text-rosa-500">{categoria}</span>.
+                </>
+              ) : (
+                <>
+                  Todas as nossas{' '}
+                  <span className="italic text-rosa-500">peças</span>.
+                </>
+              )}
             </h1>
             <p className="mt-6 text-base md:text-lg text-texto-medio font-light leading-relaxed max-w-2xl">
               Da blusa rendada ao amigurumi colecionável. Filtre por
@@ -71,17 +85,7 @@ export default async function ProdutosPage({ searchParams }: Props) {
 
       {/* Filtros + grid */}
       <div className="container-wide py-12 md:py-16">
-        <Suspense
-          fallback={
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div key={i} className="aspect-[4/5] bg-creme-100 rounded-2xl shimmer" />
-              ))}
-            </div>
-          }
-        >
-          <TabsFiltro categoria={categoria} busca={busca} />
-        </Suspense>
+        <TabsFiltro produtosIniciais={produtosVisiveis} busca={busca} />
       </div>
     </div>
   )

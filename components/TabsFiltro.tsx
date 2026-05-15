@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
 import { ProductCardFirebase } from '@/components/ProductCardFirebase'
-import { fetchProdutoosAction, type Produto } from '@/lib/produtos-actions'
+import type { Produto } from '@/lib/produtos-actions'
 
 interface TabsFiltroProps {
-  categoria?: string
+  /** Produtos pre-fetched no servidor — render instantâneo no client. */
+  produtosIniciais: Produto[]
   abaInicial?: string
   busca?: string
 }
@@ -22,44 +23,22 @@ type AbaId = (typeof ABAS)[number]['id']
 
 const easing = [0.16, 1, 0.3, 1] as const
 
-export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltroProps) {
-  const [produtos, setProdutos] = useState<Produto[]>([])
-  const [carregando, setCarregando] = useState(true)
+export function TabsFiltro({ produtosIniciais, abaInicial = 'todos', busca }: TabsFiltroProps) {
   const [abaAtiva, setAbaAtiva] = useState<AbaId>(abaInicial as AbaId)
-
-  useEffect(() => {
-    let alive = true
-    const buscar = async () => {
-      setCarregando(true)
-      try {
-        const filtros: Record<string, unknown> = categoria ? { categoria } : {}
-        const dados = await fetchProdutoosAction(filtros)
-        if (alive) setProdutos(dados)
-      } catch {
-        if (alive) setProdutos([])
-      } finally {
-        if (alive) setCarregando(false)
-      }
-    }
-    buscar()
-    return () => {
-      alive = false
-    }
-  }, [categoria])
 
   const counts: Record<AbaId, number> = useMemo(
     () => ({
-      todos: produtos.length,
-      destaque: produtos.filter((p) => p.destaque).length,
-      novo: produtos.filter((p) => p.novo).length,
-      mais_vendido: produtos.filter((p) => p.mais_vendido).length,
+      todos: produtosIniciais.length,
+      destaque: produtosIniciais.filter((p) => p.destaque).length,
+      novo: produtosIniciais.filter((p) => p.novo).length,
+      mais_vendido: produtosIniciais.filter((p) => p.mais_vendido).length,
     }),
-    [produtos]
+    [produtosIniciais]
   )
 
   const produtosFiltrados = useMemo(
     () =>
-      produtos.filter((p) => {
+      produtosIniciais.filter((p) => {
         if (abaAtiva === 'destaque' && !p.destaque) return false
         if (abaAtiva === 'novo' && !p.novo) return false
         if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
@@ -73,7 +52,7 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
         }
         return true
       }),
-    [produtos, abaAtiva, busca]
+    [produtosIniciais, abaAtiva, busca]
   )
 
   return (
@@ -100,15 +79,13 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
                 )}
                 <span className="relative flex items-center gap-2">
                   {aba.label}
-                  {!carregando && (
-                    <span
-                      className={`text-[0.65rem] font-normal tracking-normal ${
-                        ativa ? 'text-creme-100/80' : 'text-texto-claro'
-                      }`}
-                    >
-                      {counts[aba.id]}
-                    </span>
-                  )}
+                  <span
+                    className={`text-[0.65rem] font-normal tracking-normal ${
+                      ativa ? 'text-creme-100/80' : 'text-texto-claro'
+                    }`}
+                  >
+                    {counts[aba.id]}
+                  </span>
                 </span>
               </button>
             )
@@ -116,25 +93,9 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
         </div>
       </LayoutGroup>
 
-      {/* Grid de produtos */}
+      {/* Grid */}
       <AnimatePresence mode="wait">
-        {carregando ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
-          >
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="space-y-3">
-                <div className="aspect-[4/5] rounded-2xl bg-creme-100 shimmer" />
-                <div className="h-2.5 w-16 bg-creme-100 shimmer rounded" />
-                <div className="h-4 w-3/4 bg-creme-100 shimmer rounded" />
-              </div>
-            ))}
-          </motion.div>
-        ) : produtosFiltrados.length === 0 ? (
+        {produtosFiltrados.length === 0 ? (
           <motion.div
             key="empty"
             initial={{ opacity: 0, y: 20 }}
@@ -161,7 +122,7 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
           </motion.div>
         ) : (
           <motion.div
-            key={`${categoria ?? 'all'}-${abaAtiva}`}
+            key={abaAtiva}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -186,7 +147,7 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
         )}
       </AnimatePresence>
 
-      {!carregando && produtosFiltrados.length > 0 && (
+      {produtosFiltrados.length > 0 && (
         <p className="text-xs uppercase tracking-[0.2em] text-texto-claro pt-2 border-t border-creme-200">
           {produtosFiltrados.length}{' '}
           {produtosFiltrados.length === 1 ? 'peça encontrada' : 'peças encontradas'}

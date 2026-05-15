@@ -2,6 +2,10 @@
  * Curadoria de imagens reais do catálogo Hiamara Crochê.
  * Apontam para arquivos locais em /public/produtos/ — webp profissional.
  * Usadas no hero, categorias visuais, "nosso processo" e áreas editoriais.
+ *
+ * IMPORTANTE: o campo `id` deve casar (case-insensitive) com o valor de
+ * `categoria` armazenado no Firestore — é assim que /categorias mostra
+ * a contagem real de peças por categoria.
  */
 
 export interface CategoriaVitrine {
@@ -30,12 +34,12 @@ export const HERO_COLLAGE = [
 
 export const CATEGORIAS_VITRINE: CategoriaVitrine[] = [
   {
-    id: 'blusas',
-    nome: 'Blusas & Tops',
+    id: 'roupas', // categoria real no Firestore
+    nome: 'Blusas & Roupas',
     descricao: 'Peças leves, rendadas e elegantes para o seu armário.',
     imagem: '/produtos/blusa_premium-designs_2_pro.webp',
     imagemAlt: 'Blusa de crochê com design premium em tom claro',
-    href: '/produtos?categoria=Blusas',
+    href: '/produtos?categoria=Roupas',
     destaque: true,
   },
   {
@@ -47,7 +51,7 @@ export const CATEGORIAS_VITRINE: CategoriaVitrine[] = [
     href: '/produtos?categoria=Bolsas',
   },
   {
-    id: 'amigurumis',
+    id: 'bonecos',
     nome: 'Amigurumis',
     descricao: 'Bonecos colecionáveis em crochê com personalidade própria.',
     imagem: '/produtos/amigurumi_personagens-variados_1_pro.webp',
