@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState, useMemo } from 'react'
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
 import { ProductCardFirebase } from '@/components/ProductCardFirebase'
 import { fetchProdutoosAction, type Produto } from '@/lib/produtos-actions'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 interface TabsFiltroProps {
   categoria?: string
@@ -19,7 +18,9 @@ const ABAS = [
   { id: 'mais_vendido', label: 'Mais Vendidos' },
 ] as const
 
-type AbaId = typeof ABAS[number]['id']
+type AbaId = (typeof ABAS)[number]['id']
+
+const easing = [0.16, 1, 0.3, 1] as const
 
 export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltroProps) {
   const [produtos, setProdutos] = useState<Produto[]>([])
@@ -27,121 +28,168 @@ export function TabsFiltro({ categoria, abaInicial = 'todos', busca }: TabsFiltr
   const [abaAtiva, setAbaAtiva] = useState<AbaId>(abaInicial as AbaId)
 
   useEffect(() => {
-    const fetchProdutos = async () => {
+    let alive = true
+    const buscar = async () => {
       setCarregando(true)
       try {
         const filtros: Record<string, unknown> = categoria ? { categoria } : {}
         const dados = await fetchProdutoosAction(filtros)
-        setProdutos(dados)
+        if (alive) setProdutos(dados)
       } catch {
-        setProdutos([])
+        if (alive) setProdutos([])
       } finally {
-        setCarregando(false)
+        if (alive) setCarregando(false)
       }
     }
-    fetchProdutos()
+    buscar()
+    return () => {
+      alive = false
+    }
   }, [categoria])
 
-  const counts: Record<AbaId, number> = {
-    todos: produtos.length,
-    destaque: produtos.filter((p) => p.destaque).length,
-    novo: produtos.filter((p) => p.novo).length,
-    mais_vendido: produtos.filter((p) => p.mais_vendido).length,
-  }
+  const counts: Record<AbaId, number> = useMemo(
+    () => ({
+      todos: produtos.length,
+      destaque: produtos.filter((p) => p.destaque).length,
+      novo: produtos.filter((p) => p.novo).length,
+      mais_vendido: produtos.filter((p) => p.mais_vendido).length,
+    }),
+    [produtos]
+  )
 
-  const produtosFiltrados = produtos.filter((p) => {
-    if (abaAtiva === 'destaque' && !p.destaque) return false
-    if (abaAtiva === 'novo' && !p.novo) return false
-    if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
-    if (busca) {
-      const q = busca.toLowerCase()
-      return p.nome.toLowerCase().includes(q) || p.descricao.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q)
-    }
-    return true
-  })
-
-  const skeletons = Array.from({ length: 8 })
+  const produtosFiltrados = useMemo(
+    () =>
+      produtos.filter((p) => {
+        if (abaAtiva === 'destaque' && !p.destaque) return false
+        if (abaAtiva === 'novo' && !p.novo) return false
+        if (abaAtiva === 'mais_vendido' && !p.mais_vendido) return false
+        if (busca) {
+          const q = busca.toLowerCase()
+          return (
+            p.nome.toLowerCase().includes(q) ||
+            p.descricao.toLowerCase().includes(q) ||
+            p.categoria.toLowerCase().includes(q)
+          )
+        }
+        return true
+      }),
+    [produtos, abaAtiva, busca]
+  )
 
   return (
-    <div className="space-y-6">
-      <Tabs value={abaAtiva} onValueChange={(v) => setAbaAtiva(v as AbaId)}>
-        <TabsList>
-          {ABAS.map((aba) => (
-            <TabsTrigger key={aba.id} value={aba.id}>
-              {aba.label}
-              {!carregando && (
-                <span className="ml-1.5 text-[10px] font-normal normal-case tracking-normal opacity-60">
-                  ({counts[aba.id]})
-                </span>
-              )}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-
-        {ABAS.map((aba) => (
-          <TabsContent key={aba.id} value={aba.id}>
-            <AnimatePresence mode="wait">
-              {carregando ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
-                >
-                  {skeletons.map((_, i) => (
-                    <div
-                      key={i}
-                      className="aspect-[4/5] rounded-2xl bg-secondary animate-pulse"
-                    />
-                  ))}
-                </motion.div>
-              ) : produtosFiltrados.length === 0 ? (
-                <motion.div
-                  key="empty"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="text-center py-20 space-y-4"
-                >
-                  <p className="font-display text-xl font-light text-foreground">
-                    Nenhum produto encontrado
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Tente outra aba ou categoria
-                  </p>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key={`${categoria ?? 'all'}-${abaAtiva}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
-                >
-                  {produtosFiltrados.map((produto, index) => (
-                    <motion.div
-                      key={produto.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.04 }}
+    <div className="space-y-10">
+      {/* Pill tabs */}
+      <LayoutGroup id="tabs-filtro">
+        <div className="flex flex-wrap items-center gap-2 md:gap-3 p-1.5 bg-creme-100 rounded-full border border-creme-200 w-fit">
+          {ABAS.map((aba) => {
+            const ativa = abaAtiva === aba.id
+            return (
+              <button
+                key={aba.id}
+                onClick={() => setAbaAtiva(aba.id)}
+                className={`relative px-5 py-2.5 text-xs md:text-sm font-medium uppercase tracking-[0.16em] rounded-full transition-colors duration-300 ${
+                  ativa ? 'text-creme-50' : 'text-texto-medio hover:text-texto-escuro'
+                }`}
+              >
+                {ativa && (
+                  <motion.span
+                    layoutId="tab-pill"
+                    className="absolute inset-0 bg-rosa-400 rounded-full shadow-rosa"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <span className="relative flex items-center gap-2">
+                  {aba.label}
+                  {!carregando && (
+                    <span
+                      className={`text-[0.65rem] font-normal tracking-normal ${
+                        ativa ? 'text-creme-100/80' : 'text-texto-claro'
+                      }`}
                     >
-                      <ProductCardFirebase produto={produto} />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </TabsContent>
-        ))}
-      </Tabs>
+                      {counts[aba.id]}
+                    </span>
+                  )}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      </LayoutGroup>
 
-      {!carregando && (
-        <p className="text-sm text-muted-foreground">
-          {produtosFiltrados.length === 0
-            ? 'Nenhum produto nesta aba'
-            : `${produtosFiltrados.length} ${produtosFiltrados.length === 1 ? 'produto' : 'produtos'}`}
+      {/* Grid de produtos */}
+      <AnimatePresence mode="wait">
+        {carregando ? (
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
+          >
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="space-y-3">
+                <div className="aspect-[4/5] rounded-2xl bg-creme-100 shimmer" />
+                <div className="h-2.5 w-16 bg-creme-100 shimmer rounded" />
+                <div className="h-4 w-3/4 bg-creme-100 shimmer rounded" />
+              </div>
+            ))}
+          </motion.div>
+        ) : produtosFiltrados.length === 0 ? (
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="text-center py-24 max-w-md mx-auto"
+          >
+            <div className="font-display text-6xl text-rosa-200 mb-4">∅</div>
+            <p className="font-display text-2xl text-texto-escuro mb-2 font-light">
+              Nada por aqui ainda
+            </p>
+            <p className="text-sm text-texto-medio font-light">
+              Tente outra aba ou{' '}
+              <a
+                href="https://wa.me/5521997927927"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-rosa-500 underline underline-offset-4 hover:text-rosa-600 transition-colors"
+              >
+                peça sob encomenda
+              </a>
+              .
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            key={`${categoria ?? 'all'}-${abaAtiva}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: easing }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
+          >
+            {produtosFiltrados.map((produto, index) => (
+              <motion.div
+                key={produto.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: Math.min(index * 0.04, 0.5),
+                  ease: easing,
+                }}
+              >
+                <ProductCardFirebase produto={produto} priority={index < 4} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!carregando && produtosFiltrados.length > 0 && (
+        <p className="text-xs uppercase tracking-[0.2em] text-texto-claro pt-2 border-t border-creme-200">
+          {produtosFiltrados.length}{' '}
+          {produtosFiltrados.length === 1 ? 'peça encontrada' : 'peças encontradas'}
         </p>
       )}
     </div>
